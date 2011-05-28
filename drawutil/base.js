@@ -3,7 +3,15 @@ dojo.provide("drawutil.base");
 dojo.declare("drawutil.base", null,
 {
 	
-
+    model       : "", // The model containinb properties for the things being drawn
+    // Minimu modle properties are; {x:0 , y:0, height: 100, width: 100}  .
+    
+    constructor: function(args)
+    {
+        this.model = args.model;
+        this.surface = args.surface;
+    },
+    
 	getBezierFor: function(percent, C1, C2, C3, C4)
 	{
 		//====================================\\
