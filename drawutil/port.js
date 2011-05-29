@@ -43,7 +43,47 @@ dojo.declare("drawutil.port",  null ,
         red_rect.setStroke({color: "green", width: 1}); 
         this.avatar = red_rect;
         dojo.connect(red_rect.getNode(), "onclick", this, this.startConnect);
+        dojo.connect(red_rect.getNode(), "onmouseover", this, this.mouseOver);
+        dojo.connect(red_rect.getNode(), "onmouseout", this, this.mouseOut);
+        dojo.subscribe("port_highlight", dojo.hitch(this, function(arg)
+        {
+            console.log("port highlight subsciption event. arg is ..");
+            console.dir(arg);
+            if(arg)
+            {
+                this.otherport = arg[0];   
+            }
+            else
+            {
+                this.otherport = null;   
+            }
+        }));
         //'this.surface.add(this.avatar);
+    },
+    
+    mouseOver: function(e)
+    {
+        if(!this.drawLineEvent)
+        {
+            this.highlight();
+            dojo.publish("port_highlight", [this]);   
+        }
+    },
+    
+    mouseOut: function(e)
+    {
+        this.lowlight(); 
+        dojo.publish("port_highlight", [null]);
+    },
+    
+    highlight: function()
+    {
+        this.avatar.setStroke({color: "yellow", width: 2});
+    },
+    
+    lowlight: function()
+    {
+        this.avatar.setStroke({color: "green", width: 1});   
     },
     
     startConnect: function(e)
@@ -71,6 +111,18 @@ dojo.declare("drawutil.port",  null ,
     
     stopConnect: function(e)
     {
-           
+       dojo.disconnect(this.drawLineEvent);
+       this.drawLineEvent = null;
+       if(this.otherport)
+       {
+          if(this.line)
+          {
+            this.surface.remove(this.line);
+            this.line = null;
+          }
+          var ll = {x1: this.x, y1: this.y, x2: this.otherport.x, y2: this.otherport.y};
+          this.line = this.surface.createLine(ll);
+          this.line.setStroke({color: "red", width: 1}); 
+       }           
     }
 });
