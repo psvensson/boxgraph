@@ -65,7 +65,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
             switch(port.where)
             {
                 case "left":
-                    x = 0;
+                    x = -10;
                     y = port.position * jiff;
                 break;
                 case "top":
@@ -78,7 +78,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
                 break;
                 case "bottom":
                     x = port.position * jiff;
-                    y = this.model.height;
+                    y = this.model.height +10;
                 break;
             }            
             port.render(this.model.x + x, this.model.y + y);

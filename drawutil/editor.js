@@ -26,11 +26,17 @@ dojo.declare("drawutil.editor", [ dijit._Widget, dijit._Templated ],
     
     test: function()
     {
-        var block = new drawutil.block({surface: this.surface, model: {x:150, y: 150, height:100, width: 100} });
-        block.addPort({ where: "right", position: 1});
-        block.addPort({ where: "right", position: 2});
-        this.addEntity(block);  
-        block.render();
+        var block1 = new drawutil.block({surface: this.surface, model: {x:50, y: 150, height:100, width: 100} });
+        block1.addPort({ where: "right", position: 1});
+        block1.addPort({ where: "right", position: 2});
+        var block2 = new drawutil.block({surface: this.surface, model: {x:250, y: 100, height:100, width: 100} });
+        block2.addPort({ where: "left", position: 1});
+        block2.addPort({ where: "left", position: 2});
+        
+        this.addEntity(block1);  
+        this.addEntity(block2);
+        block1.render();
+        block2.render();
     },
     
     addEntity: function(e)
