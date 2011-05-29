@@ -7,11 +7,14 @@ dojo.require("dojox.gfx");
 dojo.declare("drawutil.block",  drawutil.base ,
 {    
     surface                 : "",
-
+    name                    : "",
+    ports                   : [],
+    
     constructor: function()
     {
         this.inherited(arguments);
         console.log("drawutil.block constructor. this.model is "+this.model);
+        this.name = this.model.name;
         this.render();
     },
     
@@ -19,7 +22,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
     {
         if(this.avatar)
         {
-            console.log("drawutil.flush called. this.avatar = "+this.avatar);
+            console.log("drawutil.flush called for block '"+this.name+"'. this.avatar = "+this.avatar);
             this.surface.remove(this.avatar);
             this.avatar = null;
         }
@@ -35,7 +38,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
     
     render: function()
     {
-        console.log("drawutil.render called. this.surface = "+this.surface);
+        console.log("drawutil.render called for block '"+this.name+"'. this.surface = "+this.surface);
         this.flush();
         this.renderEntity();
         this.renderPorts();  
@@ -59,7 +62,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            console.log("drawutil.block renderPorts rendering port "+p+", where = '"+port.where+"', position = "+port.position);
+            console.log("drawutil.block renderPorts called for block '"+this.name+"', rendering port "+p+", where = '"+port.where+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.where)
@@ -70,7 +73,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
                 break;
                 case "top":
                     x = port.position * jiff;
-                    y = 0;
+                    y = -10;
                 break;
                 case "right":
                     x = this.model.width;
@@ -78,7 +81,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
                 break;
                 case "bottom":
                     x = port.position * jiff;
-                    y = this.model.height +10;
+                    y = this.model.height;
                 break;
             }            
             port.render(this.model.x + x, this.model.y + y);
