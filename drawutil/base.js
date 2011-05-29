@@ -5,7 +5,7 @@ dojo.declare("drawutil.base", null,
 	
     model       : "", // The model containinb properties for the things being drawn
     // Minimum model properties are; {x:0 , y:0, height: 100, width: 100}  .
-    ports       : [],
+   
     
     constructor: function(args)
     {

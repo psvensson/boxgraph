@@ -13,6 +13,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
     constructor: function()
     {
         this.inherited(arguments);
+        this.ports = [];
         console.log("drawutil.block constructor. this.model is "+this.model);
         this.name = this.model.name;
         this.render();
