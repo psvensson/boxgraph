@@ -14,7 +14,7 @@ dojo.declare("drawutil.connector",  null ,
     constructor: function()
     {
         this.inherited(arguments);
-        console.log("drawutil.block constructor. this.model is "+this.model);
+        console.log("drawutil.block connector.");
         
     }
 });
