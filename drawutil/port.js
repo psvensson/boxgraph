@@ -9,6 +9,7 @@ dojo.declare("drawutil.port",  null ,
     side                : 10,
     x                   : 0,
     y                   : 0,
+    where               : "",  // "right", "left", "top", "bottom"
 
     constructor: function(args)
     {
