@@ -5,12 +5,15 @@ dojo.require("dijit._Widget");
 
 dojo.require("dojox.gfx");
 dojo.require("drawutil.block");
+dojo.require("drawutil.portmanager");
 
 dojo.declare("drawutil.editor", [ dijit._Widget, dijit._Templated ],
 {
 	templatePath			: dojo.moduleUrl("drawutil", "editor.html"),
     surface                 : "", // Can be provided, otherwise we create a new surface
     entities                : [],
+    
+    //06799F    216278	024E68	3AAACF	62B4CF
     
     postCreate: function()
     {
@@ -21,6 +24,7 @@ dojo.declare("drawutil.editor", [ dijit._Widget, dijit._Templated ],
 		    this.surface = dojox.gfx.createSurface(this.editordiv, 400, 400);
         }
         //----
+        this.portmanager = new drawutil.portmanager({surface : this.surface});
         this.test();
     },
     

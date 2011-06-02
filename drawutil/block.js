@@ -50,7 +50,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
         this.avatar = this.surface.createGroup();
         var red_rect = this.surface.createRect(this.model);
         //red_rect.setFill([255, 0, 0, 0.5]);
-		red_rect.setStroke({color: "blue", width: 2, join: "round" });
+		red_rect.setStroke({color: "#3AAACF", width: 2, join: "round" });
 		//red_rect.setTransform({dx: 100, dy: 100});
 		//dojo.connect(red_rect.getNode(), "onclick", function(){ alert("red"); });
 		red_rect.connect("onclick", function(){ alert("red"); });
