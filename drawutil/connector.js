@@ -14,7 +14,12 @@ dojo.declare("drawutil.connector",  null ,
     constructor: function(args)
     {
         this.inherited(arguments);
-        console.log("drawutil.block connector.");
+        console.log("drawutil.connector constructor called. args are...");
+        console.dir(args);
+        if(!args.firstport || !args.secondport)
+        {
+            throw "Y U NO BOTH FIRST AND SECOND PORTS!!!?";   
+        }
         this.firstport = args.firstport;
         this.secondport = args.secondport;
         this.surface = args.surface;
@@ -24,8 +29,10 @@ dojo.declare("drawutil.connector",  null ,
     drawLine: function()
     {
         console.log("drawutil.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
-        var ll = {x1: this.firstport.x, y1: this.firstport.y, x2: this.secondport.x, y2: this.secondport.y};
+        var j = parseInt(this.firstport.side/2, 10);
+        var ll = {x1: this.firstport.x+j, y1: this.firstport.y+j, x2: this.secondport.x+j, y2: this.secondport.y+j};
         this.line = this.surface.createLine(ll);
         this.line.setStroke({color: "#06799F", width: 1});   
+        console.log("--------------------------------------------------");
     }
 });

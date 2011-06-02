@@ -27,7 +27,7 @@ dojo.declare("drawutil.portmanager",  null ,
             }
             else
             {
-                console.log("portmanager highlight subsciption event. highlightport is now deselected.");
+                console.log("** portmanager highlight subsciption event. highlightport is now deselected.");
                 this.highlightport = null;
             }
         }));
@@ -38,7 +38,7 @@ dojo.declare("drawutil.portmanager",  null ,
             if(this.highlightport && !this.firstport)
             {               
                 this.firstport = this.highlightport;   
-                console.log("setting second port to "+this.secondport);                               
+                console.log("** setting first port to "+this.firstport);                               
                 this.startConnect();
             }
         }));
@@ -48,7 +48,7 @@ dojo.declare("drawutil.portmanager",  null ,
     {
         console.log("startconnect for port "+this.name+" called");
         this.drawLineEvent = this.surface.connect("onmousemove", this, this.drawLine);
-        this.surface.connect("onmouseup", this, this.stopConnect);
+        this.mouseupevent = this.surface.connect("onmouseup", this, this.stopConnect);
         dojo.connect(this.surface, "ondragstart",   dojo, "stopEvent");
         dojo.connect(this.surface, "onselectstart", dojo, "stopEvent");
     },
@@ -71,13 +71,14 @@ dojo.declare("drawutil.portmanager",  null ,
     
     stopConnect: function(e)
     {
-        console.log("stopConnect for port "+this.name+" called");
+        console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
         dojo.disconnect(this.drawLineEvent);
+        dojo.disconnect(this.mouseupevent);
         this.drawLineEvent = null;
         if(!this.secondport)
         {
             this.secondport = this.highlightport;
-            console.log("setting second port to "+this.firstport);
+            console.log("** setting second port to "+this.secondport);
             if(this.line)
             {
                 this.surface.remove(this.line);

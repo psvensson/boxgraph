@@ -40,7 +40,7 @@ dojo.declare("drawutil.port",  null ,
         //console.log("creating port with parameters..");
         //console.dir(rect);
         var red_rect = this.surface.createRect(rect);
-        red_rect.setFill("#216278");
+        red_rect.setFill("#66A3D2");
         red_rect.setStroke({color: "#3AAACF", width: 1}); 
         this.avatar = red_rect;
                 
