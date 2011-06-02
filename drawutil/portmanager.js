@@ -2,14 +2,15 @@ dojo.provide("drawutil.portmanager");
 
 
 dojo.require("dojox.gfx");
-
+dojo.require("drawutil.connector");
 
 dojo.declare("drawutil.portmanager",  null ,
 {    
     surface                 : "",
     firstnode               : "",
     secondnode              : "",
-
+    connectors              : [],
+    
     constructor: function(args)
     {
         this.surface = args.surface;
@@ -54,8 +55,8 @@ dojo.declare("drawutil.portmanager",  null ,
     
     drawLine: function(e)
     {
-        console.log("portmanager.drawLine.. firstport is..");
-        console.dir(this.firstport);
+        //console.log("portmanager.drawLine.. firstport is..");
+        //console.dir(this.firstport);
         //console.dir(e);
           if(this.line)
           {
@@ -82,9 +83,7 @@ dojo.declare("drawutil.portmanager",  null ,
                 this.surface.remove(this.line);
                 this.line = null;
             }
-            var ll = {x1: this.firstport.x, y1: this.firstport.y, x2: this.secondport.x, y2: this.secondport.y};
-            this.line = this.surface.createLine(ll);
-            this.line.setStroke({color: "#06799F", width: 1});
+            this.connectors.push(new drawutil.connector({surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
             this.firstport = this.secondport = null;
         }               
     }
