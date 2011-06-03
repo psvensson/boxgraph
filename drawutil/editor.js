@@ -21,7 +21,7 @@ dojo.declare("drawutil.editor", [ dijit._Widget, dijit._Templated ],
         console.log("postCreate in drawutil.editor called");
         if(!this.surface)
         {
-		    this.surface = dojox.gfx.createSurface(this.editordiv, 400, 400);
+		    this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
         }
         //----
         this.portmanager = new drawutil.portmanager({surface : this.surface});
@@ -30,14 +30,19 @@ dojo.declare("drawutil.editor", [ dijit._Widget, dijit._Templated ],
     
     test: function()
     {
-        var block1 = new drawutil.block({surface: this.surface, model: {name:"foo", x:110, y: 150, height:100, width: 100} });
+        var block1 = new drawutil.block({surface: this.surface, model: {name:"foo", x:100, y: 150, height:100, width: 100} });
         block1.addPort({ where: "right", position: 1});
         block1.addPort({ where: "right", position: 2});
-        var block2 = new drawutil.block({surface: this.surface, model: {name: "bar", x:250, y: 100, height:100, width: 100} });
-        block2.addPort({ where: "left", position: 1});
-        block2.addPort({ where: "left", position: 2});
-        block2.addPort({ where: "top", position: 1});
+        block1.addPort({ where: "left", position: 1});
+        block1.addPort({ where: "top", position: 1});
         block1.addPort({ where: "bottom", position: 1});
+        var block2 = new drawutil.block({surface: this.surface, model: {name: "bar", x:260, y: 90, height:100, width: 100} });
+        block2.addPort({ where: "left", position: 1});
+        block2.addPort({ where: "right", position: 1});
+        block2.addPort({ where: "top", position: 1});
+        block2.addPort({ where: "bottom", position: 1});
+        block2.addPort({ where: "bottom", position: 2});
+        
         
         this.addEntity(block1);  
         this.addEntity(block2);

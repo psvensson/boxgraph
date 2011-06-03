@@ -114,13 +114,26 @@ dojo.declare("drawutil.connector",  null ,
         }
         // -------------------------------- 2
         console.log("point 2");
-        if(fp.where == "top" || fp.where == "bottom") 
-        {                          
-            rv[2] = diffx > 0 ? this.goRight(rv[1],spwup) : this.goLeft(rv[1],spwup);        
+        if(fp.where == "top") 
+        {       
+            var d = 0;
+            if(sp.where == "top")
+            {
+                d = Math.abs(sp.x - rv[1].x);
+                rv[2] = diffy > 0 ? this.goRight(rv[1], d) : this.goUp(rv[1], -diffy);        
+            }
+            else if(sp.where == "right" || sp.where == "bottom")
+            {
+                d = diffx > 0 ? sp.block.model.x - fp.block.model.x + fp.block.model.width : fp.block.model.x - sp.block.model.x + sp.block.model.width;
+                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], d);
+            }
         }
-        else if(fp.where == "right" || fp.where == "left") 
+        else if(fp.where == "right") 
         {                          
-            rv[2] = diffy > 0 ? this.goDown(rv[1], sphup + fp.side) : this.goUp(rv[1], sphup + fp.side);
+            if(sp.where == "left")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs) : this.goUp(rv[1], rv[1].y - sp.y - hs);
+            }
         }
         // -------------------------------- 3
         console.log("point 3");
@@ -128,7 +141,7 @@ dojo.declare("drawutil.connector",  null ,
         {
             if(sp.where == "top")
             {
-                rv[3] = diffx > 0 ? this.goRight(rv[2],hdx) : this.goLeft(rv[3],hdx);   
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x + hs) : this.goLeft(rv[3], rv[2].x - sp.x + hs);
             }
             else if(sp.where == "right")
             {
@@ -152,6 +165,11 @@ dojo.declare("drawutil.connector",  null ,
             else if(sp.where == "right")
             {
                 rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
+            }
+            else if(sp.where == "left")
+            {
+                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
+                rv[3] = rv[2];
             }
         }
         
