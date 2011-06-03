@@ -132,7 +132,11 @@ dojo.declare("drawutil.connector",  null ,
         {                          
             if(sp.where == "left")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs) : this.goUp(rv[1], rv[1].y - sp.y - hs);
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs) : this.goUp(rv[1], rv[1].y - sp.y -hs);
+            }
+            if(sp.where == "bottom")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
             }
         }
         // -------------------------------- 3
@@ -166,10 +170,15 @@ dojo.declare("drawutil.connector",  null ,
             {
                 rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
             }
+            else if(sp.where == "bottom")
+            {
+                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) : this.goLeft(rv[2], rv[2].x - sp.x);
+            }
             else if(sp.where == "left")
             {
                 //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
-                rv[3] = rv[2];
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) : this.goLeft(rv[2], rv[2].x - sp.x);
             }
         }
         
