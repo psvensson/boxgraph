@@ -21,6 +21,7 @@ dojo.declare("drawutil.port",  null ,
         this.position = args.position;
         this.surface = args.surface;
         this.name = args.name;
+        this.block = args.block;
     },
     
     remove: function()

@@ -94,6 +94,7 @@ dojo.declare("drawutil.block",  drawutil.base ,
         console.log("drawutil.addPort called. p is..");
         console.dir(p);
         p.name = this.name+"_"+p.position;
+        p.block = this;
         p.surface = this.surface;
         //p.surface = this.avatar;
         var port = new drawutil.port(p);
