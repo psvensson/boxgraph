@@ -72,7 +72,7 @@ dojo.declare("drawutil.connector",  null ,
         var j = parseInt(this.firstport.side/2, 10);
         return {x1: this.firstport.x+j, y1: this.firstport.y+j, x2: this.secondport.x+j, y2: this.secondport.y+j}   ;
     },
-    
+     
     getManhattanRouting: function()
     {
         var rv = [{x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}];  // six points in manhattan
@@ -82,8 +82,8 @@ dojo.declare("drawutil.connector",  null ,
         console.dir({fp:fp, sp:sp});
         var diffx = sp.x - fp.x;
         var diffy = sp.y - fp.y;
-        var hdx = parseInt(diffx/2, 10);
-        var hdy = parseInt(diffy/2, 10);
+        var hdx = parseInt((diffx + sp.block.model.width)/2, 10);
+        var hdy = parseInt((diffy + sp.block.model.height)/2, 10);
         var hs = + parseInt(fp.side/2, 10);
         
         var sphup = sp.block.model.height + sp.position * 5;
@@ -114,17 +114,22 @@ dojo.declare("drawutil.connector",  null ,
         }
         // -------------------------------- 2
         console.log("point 2");
+        var d = 0;
         if(fp.where == "top") 
-        {       
-            var d = 0;
+        {                   
             if(sp.where == "top")
             {
                 d = Math.abs(sp.x - rv[1].x);
                 rv[2] = diffy > 0 ? this.goRight(rv[1], d) : this.goUp(rv[1], -diffy);        
             }
-            else if(sp.where == "right" || sp.where == "bottom")
+            else if(sp.where == "right" || sp.where == "left")
             {
                 d = diffx > 0 ? sp.block.model.x - fp.block.model.x + fp.block.model.width : fp.block.model.x - sp.block.model.x + sp.block.model.width;
+                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], d);
+            }
+            else if(sp.where == "bottom")
+            {
+                d = diffx > 0 ? hdx : hdx;
                 rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], d);
             }
         }
@@ -134,9 +139,31 @@ dojo.declare("drawutil.connector",  null ,
             {
                 rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs) : this.goUp(rv[1], rv[1].y - sp.y -hs);
             }
-            if(sp.where == "bottom")
+            else if(sp.where == "bottom")
             {
                 rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
+            }
+            else if(sp.where == "top")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);                
+            }
+            else if(sp.where == "right")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);                
+            }
+        }
+        else if(fp.where == "bottom")
+        {
+            if(sp.where == "top")
+            {
+                //d = diffx > 0 ? sp.block.model.x - fp.block.model.x + fp.block.model.width : fp.block.model.x - sp.block.model.x + sp.block.model.width;
+                //d = diffx > 0 ? hdx : -hdx;
+                rv[2] = diffx > 0 ? this.goRight(rv[1], diffx) : this.goLeft(rv[1], -diffx);
+            }
+            else if(sp.where == "bottom")
+            {
+                //d = diffx > 0 ? hdx : hdx;
+                rv[2] = diffx > 0 ? this.goRight(rv[1], hdx) : this.goLeft(rv[1], -hdx);
             }
         }
         // -------------------------------- 3
@@ -153,14 +180,14 @@ dojo.declare("drawutil.connector",  null ,
             }
             else if(sp.where == "bottom")
             {
-                rv[3] = diffy > 0 ? this.goDown(rv[2],sphup * 2) : this.goUp(rv[2],sphup * 2);
+                rv[3] = diffy > 0 ? this.goDown(rv[2], diffy + sp.side) : this.goUp(rv[2], diffy + sp.side);
             }
             else if(sp.where == "left")
             {
                 rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) : this.goLeft(rv[2],spwup * 2);
             }
         }
-        if(fp.where == "right")
+        else if(fp.where == "right")
         {
             if(sp.where == "top")
             {
@@ -179,6 +206,13 @@ dojo.declare("drawutil.connector",  null ,
             {
                 //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
                 rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) : this.goLeft(rv[2], rv[2].x - sp.x);
+            }
+        }
+        else if(fp.where == "bottom")
+        {
+            if(sp.where == "top")
+            {
+                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y + parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y - sp.y - parseInt(fp.side/2, 10));
             }
         }
         
