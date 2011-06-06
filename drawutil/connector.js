@@ -130,7 +130,7 @@ dojo.declare("drawutil.connector",  null ,
             else if(sp.where == "bottom")
             {
                 d = diffx > 0 ? hdx : hdx;
-                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], d);
+                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], -d);
             }
         }
         else if(fp.where == "right") 
@@ -166,6 +166,21 @@ dojo.declare("drawutil.connector",  null ,
                 rv[2] = diffx > 0 ? this.goRight(rv[1], hdx) : this.goLeft(rv[1], -hdx);
             }
         }
+        else if(fp.where == "left") 
+        {                          
+            if(sp.where == "right")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y +hs);
+            }
+            else if(sp.where == "bottom" || sp.where == "top")
+            {
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
+            }
+            else if(sp.where == "left")
+            {
+                
+            }
+        }
         // -------------------------------- 3
         console.log("point 3");
         if(fp.where == "top")
@@ -187,7 +202,7 @@ dojo.declare("drawutil.connector",  null ,
                 rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) : this.goLeft(rv[2],spwup * 2);
             }
         }
-        else if(fp.where == "right")
+        else if(fp.where == "right" || fp.where == "left")
         {
             if(sp.where == "top")
             {
@@ -211,6 +226,10 @@ dojo.declare("drawutil.connector",  null ,
         else if(fp.where == "bottom")
         {
             if(sp.where == "top")
+            {
+                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y + parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y - sp.y - parseInt(fp.side/2, 10));
+            }
+            else if(sp.where == "bottom")
             {
                 rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y + parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y - sp.y - parseInt(fp.side/2, 10));
             }
