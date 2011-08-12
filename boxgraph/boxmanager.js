@@ -12,7 +12,7 @@ dojo.declare("boxgraph.boxmanager", null,
     
     addBox: function(box)
     {
-        
+        this.boxes.push(box);
     },
     
     getBoxes: function()

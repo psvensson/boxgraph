@@ -10,11 +10,12 @@ dojo.declare("boxgraph.portmanager",  null ,
     firstnode               : "",
     secondnode              : "",
     connectors              : [],
+    boxmnanager             : "",
     
     constructor: function(args)
     {
         this.surface = args.surface;
-        
+        this.boxmanager = args.boxmanager;
         
         console.log("boxgraph.portmanager constructor.");
         
@@ -84,7 +85,7 @@ dojo.declare("boxgraph.portmanager",  null ,
                 this.surface.remove(this.line);
                 this.line = null;
             }
-            this.connectors.push(new boxgraph.connector({surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
+            this.connectors.push(new boxgraph.connector({boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
             this.firstport = this.secondport = null;
         }               
     }

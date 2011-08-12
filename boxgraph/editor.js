@@ -24,7 +24,8 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 		    this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
         }
         //----
-        this.portmanager = new boxgraph.portmanager({surface : this.surface});
+        this.boxmanager = new boxgraph.boxmanager();
+        this.portmanager = new boxgraph.portmanager({surface : this.surface, boxmanager: this.boxmanager}); // Need boxmanager to get coords of boxes when routing
         this.test();
     },
     
@@ -36,13 +37,14 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
         block1.addPort({ where: "left", position: 1});
         block1.addPort({ where: "top", position: 1});
         block1.addPort({ where: "bottom", position: 1});
+        this.boxmanager.addBox(block1);
         var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:260, y: 90, height:100, width: 100} });
         block2.addPort({ where: "left", position: 1});
         block2.addPort({ where: "right", position: 1});
         block2.addPort({ where: "top", position: 1});
         block2.addPort({ where: "bottom", position: 1});
         block2.addPort({ where: "bottom", position: 2});
-        
+        this.boxmanager.addBox(block2);
         
         this.addEntity(block1);  
         this.addEntity(block2);
