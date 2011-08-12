@@ -17,7 +17,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         
         while(nextpoint.x != sp.x && nextpoint.y != sp.y) // Loop until the next point _is_ our destination
         {
-            var dir = this.getDirection(fp, sp); // If sp.x > fp.x and fp is located 'up', then direction is left
+            var dir = this.getDirection(nextpoint, sp); // If sp.x > fp.x and fp is located 'up', then direction is left
             nextpoint = this.getNextPoint(dir, nextpoint, sp);
             rv.push(nextpoint);
         }
@@ -25,11 +25,26 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         return rv;
 	},
     
+    // The direction of a line. It is dependent on 1) The face of the box the first/beginning port is on and then on the +/- of the coord diff between fp & sp
+    // Directions; 0 - up, 1 - right, 2 - down, 3 - left
     getDirection: function(fp, sp)
     {
-        
+        var dir = -1;
+        switch(fp.where)
+        {
+            case "up":
+            case "down":
+                dir = sp.x > fp.x ? 3 : 1  // If second port is to the left of first port, we go left, else right..
+            break;
+            case "right":            
+            case "left":
+                dir = sp.y > fp.y ? 2 : 0
+            break;
+        }
+        return dir;
     },
     
+    // Uses the boxmanager to search for the next empty space for a given direction. E.g. a coordinate which is not inside a box in the line of directions.
     getNextPoint: function(dir, startpoint, sp)
     {
         
