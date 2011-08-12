@@ -21,11 +21,7 @@ dojo.declare("boxgraph.connector",  null ,
     
     constructor: function(args)
     {
-    	this.manhattan = new boxgraph.routing.manhattan();
-    	this.straight = new boxgraph.routing.straight();
-    	this.curved = new boxgraph.routing.curved();
-
-        this.inherited(arguments);
+    	this.inherited(arguments);
         console.log("boxgraph.connector constructor called. args are...");
         console.dir(args);
         if(!args.firstport || !args.secondport)
@@ -36,6 +32,11 @@ dojo.declare("boxgraph.connector",  null ,
         this.secondport = args.secondport;
         this.surface = args.surface;
         this.boxmanager = args.boxmanager;
+        
+        this.manhattan = new boxgraph.routing.manhattan({boxmanager: this.boxmanager});
+        this.straight = new boxgraph.routing.straight({boxmanager: this.boxmanager});
+    	this.curved = new boxgraph.routing.curved({boxmanager: this.boxmanager});
+        
         this.drawLine();
     },
     
