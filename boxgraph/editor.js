@@ -6,6 +6,7 @@ dojo.require("dijit._Widget");
 dojo.require("dojox.gfx");
 dojo.require("boxgraph.box");
 dojo.require("boxgraph.portmanager");
+dojo.require("boxgraph.boxmanager");
 
 dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 {
