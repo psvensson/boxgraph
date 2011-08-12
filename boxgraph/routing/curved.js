@@ -1,6 +1,6 @@
-dojo.provide("drawutil.routing.curved");
+dojo.provide("boxgraph.routing.curved");
 
-dojo.declare("drawutil.routing.curved", null,
+dojo.declare("boxgraph.routing.curved", null,
 {
 	getRouting: function(firstport, secondport)
 	{

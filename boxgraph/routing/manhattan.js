@@ -11,12 +11,12 @@ dojo.declare("boxgraph.routing.manhattan", null,
         console.dir({fp:fp, sp:sp});
         var diffx = sp.x - fp.x;
         var diffy = sp.y - fp.y;
-        var hdx = parseInt((diffx + sp.block.model.width)/2, 10);
-        var hdy = parseInt((diffy + sp.block.model.height)/2, 10);
+        var hdx = parseInt((diffx + sp.box.model.width)/2, 10);
+        var hdy = parseInt((diffy + sp.box.model.height)/2, 10);
         var hs = + parseInt(fp.side/2, 10);
         
-        var sphup = sp.block.model.height + sp.position * 5;
-        var spwup = sp.block.model.width + sp.position * 5;
+        var sphup = sp.box.model.height + sp.position * 5;
+        var spwup = sp.box.model.width + sp.position * 5;
         
         console.log("Manhattan: diffx="+diffx+", diffy="+diffy+", hdx="+hdx+". hdy="+hdy+", spwup = "+spwup+", sphup = "+sphup);
         console.log("Manhattan: fp.where = '"+fp.where+"', sp.where = '"+sp.where+"'");

@@ -4,7 +4,7 @@ dojo.require("dijit._Templated");
 dojo.require("dijit._Widget");
 
 dojo.require("dojox.gfx");
-dojo.require("boxgraph.block");
+dojo.require("boxgraph.box");
 dojo.require("boxgraph.portmanager");
 
 dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
@@ -30,13 +30,13 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
     
     test: function()
     {
-        var block1 = new boxgraph.block({surface: this.surface, model: {name:"foo", x:100, y: 150, height:100, width: 100} });
+        var block1 = new boxgraph.box({surface: this.surface, model: {name:"foo", x:100, y: 150, height:100, width: 100} });
         block1.addPort({ where: "right", position: 1});
         block1.addPort({ where: "right", position: 2});
         block1.addPort({ where: "left", position: 1});
         block1.addPort({ where: "top", position: 1});
         block1.addPort({ where: "bottom", position: 1});
-        var block2 = new boxgraph.block({surface: this.surface, model: {name: "bar", x:260, y: 90, height:100, width: 100} });
+        var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:260, y: 90, height:100, width: 100} });
         block2.addPort({ where: "left", position: 1});
         block2.addPort({ where: "right", position: 1});
         block2.addPort({ where: "top", position: 1});
