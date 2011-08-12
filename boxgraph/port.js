@@ -1,9 +1,9 @@
-dojo.provide("drawutil.port");
+dojo.provide("boxgraph.port");
 
 
 dojo.require("dojox.gfx");
 
-dojo.declare("drawutil.port",  null ,
+dojo.declare("boxgraph.port",  null ,
 {    
     surface             : "",
     side                : 10,
@@ -14,7 +14,7 @@ dojo.declare("drawutil.port",  null ,
     constructor: function(args)
     {
         this.inherited(arguments);
-        console.log("drawutil.port constructor. args are "+args);
+        console.log("boxgraph.port constructor. args are "+args);
         this.x = args.x;
         this.y = args.y;
         this.where = args.where;
@@ -26,7 +26,7 @@ dojo.declare("drawutil.port",  null ,
     
     remove: function()
     {
-        console.log("drawutil.port "+this.name+" remove called..");
+        console.log("boxgraph.port "+this.name+" remove called..");
       if(this.avatar)
       {
         this.surface.remove(this.avatar);   
@@ -37,7 +37,7 @@ dojo.declare("drawutil.port",  null ,
     {
         this.x = x;
         this.y = y;
-        //console.log("drawutil.port "+this.name+" render called. x = "+x+", y = "+y);
+        //console.log("boxgraph.port "+this.name+" render called. x = "+x+", y = "+y);
         var rect = {x: x, y: y, width: this.side, height: this.side};
         //console.log("creating port with parameters..");
         //console.dir(rect);

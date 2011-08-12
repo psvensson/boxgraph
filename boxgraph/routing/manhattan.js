@@ -1,6 +1,6 @@
-dojo.provide("drawutil.routing.manhattan");
+dojo.provide("boxgraph.routing.manhattan");
 
-dojo.declare("drawutil.routing.manhattan", null,
+dojo.declare("boxgraph.routing.manhattan", null,
 {
     getRouting: function(fp, sp)
     {

@@ -11,25 +11,18 @@
             debugAtAllCosts: true,
             baseUrl: "./",
             parseOnLoad: true,
-            modulePaths: {'drawutil': './drawutil'}
+            modulePaths: {'boxgraph': './boxgraph'}
        }
     </script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.5.0/dojo/dojo.xd.js"></script>
 
     <script type="text/javascript">
-        //dojo.require("drawutil.test.testBezier");
-        dojo.require("drawutil.editor");
+        
+        dojo.require("boxgraph.editor");
         dojo.ready(function()
         {
-
-            /*
-            console.log("drawutil.test.testBezier = "+drawutil.test.testBezier);
-            var div = dojo.byId('foo');
-            console.log(" div = "+div);
-            var test = new drawutil.test.testBezier();
-            div.appendChild(test.domNode);
-            */
+           
         })
     </script>
 </head>

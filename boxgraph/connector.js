@@ -1,10 +1,10 @@
-dojo.provide("drawutil.connector");
+dojo.provide("boxgraph.connector");
 
 
-dojo.require("drawutil.routing.manhattan");
-dojo.require("drawutil.routing.manhattan2");
-dojo.require("drawutil.routing.straight");
-dojo.require("drawutil.routing.curved");
+dojo.require("boxgraph.routing.manhattan");
+dojo.require("boxgraph.routing.manhattan2");
+dojo.require("boxgraph.routing.straight");
+dojo.require("boxgraph.routing.curved");
 
 dojo.require("dojox.gfx");
 
@@ -12,7 +12,7 @@ dojo.require("dojox.gfx");
 The connector exists on two modes; 1 = Live, 2 = Decorative. The live mode means that a port has created it in responsoe to a user click and its line will be drawn conitnually in responsoe to
 mouse movemenets - until the user clicks again within the ratio of another, accepting, port o another block. In decorative mode, it just renders the line between the two ports of the two blocks
 */
-dojo.declare("drawutil.connector",  null ,
+dojo.declare("boxgraph.connector",  null ,
 {    
     surface                 : "",
     //routing                 : "straight", // "straight", "manhattan", "curved"
@@ -20,12 +20,12 @@ dojo.declare("drawutil.connector",  null ,
 
     constructor: function(args)
     {
-	this.manhattan = new drawutil.routing.manhattan();
-	this.straight = new drawutil.routing.straight();
-	this.curved = new drawutil.routing.curved();
+	this.manhattan = new boxgraph.routing.manhattan();
+	this.straight = new boxgraph.routing.straight();
+	this.curved = new boxgraph.routing.curved();
 
         this.inherited(arguments);
-        console.log("drawutil.connector constructor called. args are...");
+        console.log("boxgraph.connector constructor called. args are...");
         console.dir(args);
         if(!args.firstport || !args.secondport)
         {
@@ -48,7 +48,7 @@ dojo.declare("drawutil.connector",  null ,
     
     drawLine: function()
     {
-        console.log("drawutil.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+        console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
         
         var ll = this.getRoute();
         console.log("got route of type '"+this.routing+"' ;");

@@ -1,6 +1,6 @@
-dojo.provide("drawutil.base");
+dojo.provide("boxgraph.base");
 
-dojo.declare("drawutil.base", null,
+dojo.declare("boxgraph.base", null,
 {
 	
     model       : "", // The model containinb properties for the things being drawn

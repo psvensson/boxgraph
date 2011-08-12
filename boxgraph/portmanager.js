@@ -1,10 +1,10 @@
-dojo.provide("drawutil.portmanager");
+dojo.provide("boxgraph.portmanager");
 
 
 dojo.require("dojox.gfx");
-dojo.require("drawutil.connector");
+dojo.require("boxgraph.connector");
 
-dojo.declare("drawutil.portmanager",  null ,
+dojo.declare("boxgraph.portmanager",  null ,
 {    
     surface                 : "",
     firstnode               : "",
@@ -16,7 +16,7 @@ dojo.declare("drawutil.portmanager",  null ,
         this.surface = args.surface;
         
         
-        console.log("drawutil.portmanager constructor.");
+        console.log("boxgraph.portmanager constructor.");
         
         dojo.subscribe("port_highlight", dojo.hitch(this, function(arg)
         {                        
@@ -34,7 +34,7 @@ dojo.declare("drawutil.portmanager",  null ,
         
         this.surface.connect("onmousedown", dojo.hitch(this, function(e)
         {
-            console.log("drawutil.portmanager onmousedown event handler. this.highlightport = "+this.highlightport);
+            console.log("boxgraph.portmanager onmousedown event handler. this.highlightport = "+this.highlightport);
             if(this.highlightport && !this.firstport)
             {               
                 this.firstport = this.highlightport;   
@@ -84,7 +84,7 @@ dojo.declare("drawutil.portmanager",  null ,
                 this.surface.remove(this.line);
                 this.line = null;
             }
-            this.connectors.push(new drawutil.connector({surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
+            this.connectors.push(new boxgraph.connector({surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
             this.firstport = this.secondport = null;
         }               
     }

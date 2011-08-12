@@ -1,6 +1,6 @@
-dojo.provide("drawutil.routing.straight");
+dojo.provide("boxgraph.routing.straight");
 
-dojo.declare("drawutil.routing.straight", null,
+dojo.declare("boxgraph.routing.straight", null,
 {
     getRouting: function(firstport, secondport)
     {
