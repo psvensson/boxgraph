@@ -58,9 +58,14 @@ dojo.declare("boxgraph.boxmanager", null,
         var rv = {x: -1, y: -1, dir: "whatever"};
         var list = (dir == "up" || dir == "down") ? this.ylist : this.xlist;
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
+        var axisother = (dir == "up" || dir == "down") ? "x" : "y";
         var length = (dir == "up" || dir == "down") ? "height" : "width";
+        var target={};
+        target[otheraxis] = start[otheraxis];
+        target[axis] = dest[axis];
+        // Now we have a target point
         
-        // We want to get from start[axis] to dest[axis], e.g. start.x to dest.x 
+        // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
         // We need to see if there are any boxes which block the way to dest[axis] and end the chase there.
         
         
