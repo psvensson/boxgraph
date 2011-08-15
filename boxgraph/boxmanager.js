@@ -52,7 +52,7 @@ dojo.declare("boxgraph.boxmanager", null,
     // From the startingpoints relevant axis (defined by dir) we see if the destination point axis is not within any boxes
     // If the destination axis point (e.g. dest.x for left or right) is within a box, then we give the margin axis point before
     // that box and return, but make sure to change dir on the returned point so it strives towards the other axis, as we've now
-    // exhausted or potential on th axis of the current one.
+    // exhausted or potential on the axis of the current one.
     getGoodPointFor: function(dir, start, dest)
     {
         var rv = {x: -1, y: -1, dir: "whatever"};
@@ -60,6 +60,11 @@ dojo.declare("boxgraph.boxmanager", null,
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
         var length = (dir == "up" || dir == "down") ? "height" : "width";
         
+        // We want to get from start[axis] to dest[axis], e.g. start.x to dest.x 
+        // We need to see if there are any boxes which block the way to dest[axis] and end the chase there.
+        
+        
+        /*
         var checkbox = list[0];
         if(list.length > 1)
         {
@@ -74,6 +79,8 @@ dojo.declare("boxgraph.boxmanager", null,
                 
             } 
         }
+        */
+        
         rv = this.getMarginBoxFor(dir, begin, checkbox);
         return rv;
     }
