@@ -9,7 +9,7 @@ dojo.declare("boxgraph.port",  null ,
     side                : 10,
     x                   : 0,
     y                   : 0,
-    dir               : "",  // "right", "left", "top", "bottom"
+    dir               : "",  // "right", "left", "top", "down"
 
     constructor: function(args)
     {

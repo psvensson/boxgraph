@@ -6,7 +6,7 @@ dojo.declare("boxgraph.boxmanager", null,
     boxes:      [],
     xlist:      [],
     ylist:      [],
-    margin:     20, // Margin in Canvas px that we want a gap between boxes to have
+    margin:     5, // Margin in Canvas px that we want a gap between boxes to have
     
     constructor: function()
     {
@@ -85,7 +85,7 @@ dojo.declare("boxgraph.boxmanager", null,
         
         var target={};
         target[otheraxis]   = start[otheraxis]  ;
-        target[axis]        = dest[axis] ;
+        target[axis]        = dest[axis] - this.margin;
         // Now we have a target point
         
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
@@ -115,9 +115,9 @@ dojo.declare("boxgraph.boxmanager", null,
                   rv = target;
             }
 
-        }
-        console.log("+++ getGoodPointFor called. returning "+rv);
+        }        
         rv.dir = start.dir;
+        console.log("+++ getGoodPointFor called. returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
         return rv;
     }
     

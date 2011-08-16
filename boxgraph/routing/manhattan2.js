@@ -15,10 +15,10 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     {        
         console.log("--- getRouting called.");
         console.dir({fp: fp, sp: sp});
-        var nextpoint = { x: fp.x, y: fp.y, dir: fp.dir };
+        var nextpoint = { x: fp.x + 5, y: fp.y + 5, dir: fp.dir };
         var rv = [nextpoint]; // Returns an array of {x:0, y:0} objects, beginning at fp
         var count = 0;
-        while(!(Math.abs(nextpoint.x - sp.x) < 10 && Math.abs(nextpoint.y == sp.y) < 10 )) // Loop until the next point _is_ our destination
+        while(!(Math.abs(nextpoint.x - sp.x) < 11 && Math.abs(nextpoint.y == sp.y) < 11 )) // Loop until the next point _is_ our destination
         {
             if(count++ > this.sanitycheck)
             {
@@ -34,15 +34,16 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         console.log("+++ getRouting while loop done. nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y);
         rv.push(nextpoint); // And add that as well. We're home.
         // Push last point
-        rv.push({ x: sp.x, y: sp.y, dir: sp.dir });
+        rv.push({ x: sp.x + 5, y: sp.y + 5, dir: sp.dir });
         return rv;
 	},
     
     // The direction of a line. It is dependent on 1) The face of the box the first/beginning port is on and 2) on the +/- of the coord diff between fp & sp
     getDirection: function(fp, sp)
     {
-        //
+       // console.log("=== getDirection for direction '"+fp.dir+"' called");
         var dir = -1;
+        if(fp.dir == -1) throw ("WTF!!!");
         switch(fp.dir)
         {
             case "up":
@@ -54,7 +55,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
                 dir = sp.y > fp.y ? "down" : "up";
             break;
         }
-        console.log("=== getDirection for direction '"+fp.dir+"', returns '"+dir+"'");
+        //console.log("=== getDirection for direction '"+fp.dir+"', returns '"+dir+"'");
         return dir;
     },
     
@@ -63,7 +64,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     {
         var goodpoint = this.boxmanager.getGoodPointFor(startpoint, sp);
         goodpoint.dir = this.getDirection(goodpoint, sp);
-        console.log("getNextPoint for dir '"+startpoint.dir+"'");
+        //console.log("getNextPoint for dir '"+startpoint.dir+"'");
         console.dir({startpoint: startpoint, nextpoint: goodpoint});
         return goodpoint;
     }

@@ -80,7 +80,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
                     x = this.model.width;
                     y = port.position * jiff;
                 break;
-                case "bottom":
+                case "down":
                     x = port.position * jiff;
                     y = this.model.height;
                 break;
