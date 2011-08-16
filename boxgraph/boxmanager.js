@@ -96,7 +96,7 @@ dojo.declare("boxgraph.boxmanager", null,
         {
             try
             {
-            console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
+            //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
             var box = list[i];
             var faxis = parseInt(box.model[axis]);
             var flength = parseInt(box.model[length]);
@@ -116,8 +116,8 @@ dojo.declare("boxgraph.boxmanager", null,
                 {
                     console.log("collission");
                     // Collission. Stop before, chage dir and break
-                    rv[axis] = parseInt(box.model[axis]) - this.margin;
-                    rv[otheraxis] = start[otheraxis];                    
+                    rv[axis] = parseInt(box.model[axis]) + this.margin;
+                    rv[otheraxis] = start[otheraxis] ;                    
                     break;
                 }                 
             //}   

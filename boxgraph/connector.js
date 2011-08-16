@@ -26,7 +26,8 @@ dojo.declare("boxgraph.connector",  null ,
         console.dir(args);
         if(!args.firstport || !args.secondport)
         {
-            throw "Y U NO BOTH FIRST AND SECOND PORTS!!!?";   
+            //throw "Y U NO BOTH FIRST AND SECOND PORTS!!!?";   
+            return;
         }
         this.firstport = args.firstport;
         this.secondport = args.secondport;
