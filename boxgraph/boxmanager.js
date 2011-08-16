@@ -17,11 +17,13 @@ dojo.declare("boxgraph.boxmanager", null,
     
     addBox: function(newbox)
     {
+        /*
         console.log("addBox called for "+newbox);
         console.log("xlist is.:");
         console.dir(this.xlist);
         console.log("ylist is..");
         console.dir(this.ylist);
+        */
         this.boxes.push(newbox);
         // Make sure we create ordered list for x and y coordinates, so we quickly can iterate from low to high
         var xindex = 0;
@@ -69,15 +71,15 @@ dojo.declare("boxgraph.boxmanager", null,
     //
     // The use of axis here can mean 'x' or 'y' depending on direcitons, this also relates to the lenght and otherlength properties which are 'length' and 'width' of a box depending again on direction
     // This makes the method harder to read, I guess, but more DRY and versatile. YMMV.
-    getGoodPointFor: function(dir, start, dest)
+    getGoodPointFor: function(start, dest)
     {
         var rv = {x: -1, y: -1, dir: "whatever"};
-        
+        var dir = start.dir;
         var list = (dir == "up" || dir == "down") ? this.ylist : this.xlist;
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
         var otheraxis = (dir == "up" || dir == "down") ? "x" : "y";
         
-        console.log("getGoodPointFor called. dir='"+dir+"', list.length="+list.length+", axis='"+axis+"', otheraxis='"+otheraxis+"'");
+        
         
         var length          = (dir == "up" || dir == "down") ? "height" : "width";
         var otherlength     = (dir == "up" || dir == "down") ? "width" : "height";
@@ -90,33 +92,32 @@ dojo.declare("boxgraph.boxmanager", null,
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
         // We need to see if there are any boxes which block the way to dest[axis] and end the chase there.        
             
-        if(list.length > 1)
+        
+        for(var i = 1; i < list.length; i++)
         {
-            for(var i = 1; i < list.length; i++)
+            var box = list[i];
+            // check if target is within any boxes
+            if(parseInt(box.model[axis])+parseInt(box.model[length]) > target[axis] && parseInt(box.model[axis]) < target[axis]) // target[axis] is within the box axis
             {
-                var box = list[i];
-                // check if target is within any boxes
-                if(parseInt(box.model[axis])+parseInt(box.model[length]) > target[axis] && parseInt(box.model[axis]) < target[axis]) // target[axis] is within the box axis
+                if(parseInt(box.model[otheraxis])+parseInt(box.model[otherlength]) > target[otheraxis] && parseInt(box.model[otheraxis]) < target[otheraxis]) // target[axis] is within the box axis
                 {
-                    if(parseInt(box.model[otheraxis])+parseInt(box.model[otherlength]) > target[otheraxis] && parseInt(box.model[otheraxis]) < target[otheraxis]) // target[axis] is within the box axis
-                    {
-                        console.log("collission");
-                        // Collission. Stop before, chage dir and break
-                        rv[axis] = parseInt(box.model[axis]) - this.margin;
-                        rv[otheraxis] = starts[otheraxis];
-                        
-                        break;
-                    }                 
-                }
-                else
-                {
-                      // Nope, we're clean. return target.
-                      console.log("no collission.");
-                      rv = target;
-                }
+                    console.log("collission");
+                    // Collission. Stop before, chage dir and break
+                    rv[axis] = parseInt(box.model[axis]) - this.margin;
+                    rv[otheraxis] = starts[otheraxis];
+                    
+                    break;
+                }                 
+            }
+            else
+            {
+                  // Nope, we're clean. return target.
+                  console.log("no collission.");
+                  rv = target;
+            }
 
-            } 
-        }       
+        }
+        console.log("+++ getGoodPointFor called. returning "+rv);
         rv.dir = start.dir;
         return rv;
     }

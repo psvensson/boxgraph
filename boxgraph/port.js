@@ -14,7 +14,7 @@ dojo.declare("boxgraph.port",  null ,
     constructor: function(args)
     {
         this.inherited(arguments);
-        console.log("boxgraph.port constructor. args are "+args);
+        //console.log("boxgraph.port constructor. args are "+args);
         this.x = args.x;
         this.y = args.y;
         this.dir = args.dir;
@@ -26,7 +26,7 @@ dojo.declare("boxgraph.port",  null ,
     
     remove: function()
     {
-        console.log("boxgraph.port "+this.name+" remove called..");
+        //console.log("boxgraph.port "+this.name+" remove called..");
       if(this.avatar)
       {
         this.surface.remove(this.avatar);   

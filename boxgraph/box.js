@@ -63,7 +63,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
+            //console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.dir)
@@ -91,8 +91,8 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         
     addPort: function(p)
     {        
-        console.log("boxgraph.addPort called. p is..");
-        console.dir(p);
+        //console.log("boxgraph.addPort called. p is..");
+        //console.dir(p);
         p.name = this.name+"_"+p.position;
         p.box = this;
         p.surface = this.surface;

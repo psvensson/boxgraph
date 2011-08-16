@@ -52,7 +52,7 @@ dojo.declare("boxgraph.connector",  null ,
     
     drawLine: function()
     {
-        console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+        //console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
         
         var ll = this.getRoute();
         console.log("got route of type '"+this.routing+"' ;");
