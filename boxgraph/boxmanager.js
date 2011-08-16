@@ -75,18 +75,17 @@ dojo.declare("boxgraph.boxmanager", null,
     {
         var rv = {x: -1, y: -1, dir: "whatever"};
         var dir = start.dir;
+        
         var list = (dir == "up" || dir == "down") ? this.ylist : this.xlist;
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
-        var otheraxis = (dir == "up" || dir == "down") ? "x" : "y";
-        
-        
+        var otheraxis = (dir == "up" || dir == "down") ? "x" : "y";        
         
         var length          = (dir == "up" || dir == "down") ? "height" : "width";
         var otherlength     = (dir == "up" || dir == "down") ? "width" : "height";
         
         var target={};
-        target[otheraxis]   = start[otheraxis];
-        target[axis]        = dest[axis];
+        target[otheraxis]   = start[otheraxis]  ;
+        target[axis]        = dest[axis] ;
         // Now we have a target point
         
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
@@ -104,7 +103,7 @@ dojo.declare("boxgraph.boxmanager", null,
                     console.log("collission");
                     // Collission. Stop before, chage dir and break
                     rv[axis] = parseInt(box.model[axis]) - this.margin;
-                    rv[otheraxis] = starts[otheraxis];
+                    rv[otheraxis] = start[otheraxis];
                     
                     break;
                 }                 
@@ -112,7 +111,7 @@ dojo.declare("boxgraph.boxmanager", null,
             else
             {
                   // Nope, we're clean. return target.
-                  console.log("no collission.");
+                  //console.log("no collission.");
                   rv = target;
             }
 

@@ -18,7 +18,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         var nextpoint = { x: fp.x, y: fp.y, dir: fp.dir };
         var rv = [nextpoint]; // Returns an array of {x:0, y:0} objects, beginning at fp
         var count = 0;
-        while(!(nextpoint.x == sp.x && nextpoint.y == sp.y)) // Loop until the next point _is_ our destination
+        while(!(Math.abs(nextpoint.x - sp.x) < 10 && Math.abs(nextpoint.y == sp.y) < 10 )) // Loop until the next point _is_ our destination
         {
             if(count++ > this.sanitycheck)
             {
@@ -33,6 +33,8 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         }
         console.log("+++ getRouting while loop done. nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y);
         rv.push(nextpoint); // And add that as well. We're home.
+        // Push last point
+        rv.push({ x: sp.x, y: sp.y, dir: sp.dir });
         return rv;
 	},
     
