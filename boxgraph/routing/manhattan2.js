@@ -65,7 +65,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         var goodpoint = this.boxmanager.getGoodPointFor(startpoint, sp);
         goodpoint.dir = this.getDirection(goodpoint, sp);
         //console.log("getNextPoint for dir '"+startpoint.dir+"'");
-        console.dir({startpoint: startpoint, nextpoint: goodpoint});
+        //console.dir({startpoint: startpoint, nextpoint: goodpoint});
         return goodpoint;
     }
 });

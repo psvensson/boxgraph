@@ -6,7 +6,7 @@ dojo.declare("boxgraph.boxmanager", null,
     boxes:      [],
     xlist:      [],
     ylist:      [],
-    margin:     5, // Margin in Canvas px that we want a gap between boxes to have
+    margin:     -5, // Margin in Canvas px that we want a gap between boxes to have
     
     constructor: function()
     {
@@ -91,34 +91,57 @@ dojo.declare("boxgraph.boxmanager", null,
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
         // We need to see if there are any boxes which block the way to dest[axis] and end the chase there.        
             
-        
-        for(var i = 1; i < list.length; i++)
+        rv = target; // default
+        for(var i = 0; i < list.length; i++)
         {
-            var box = list[i];
-            // check if target is within any boxes
-            if(parseInt(box.model[axis])+parseInt(box.model[length]) > target[axis] && parseInt(box.model[axis]) < target[axis]) // target[axis] is within the box axis
+            try
             {
-                if(parseInt(box.model[otheraxis])+parseInt(box.model[otherlength]) > target[otheraxis] && parseInt(box.model[otheraxis]) < target[otheraxis]) // target[axis] is within the box axis
+            console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
+            var box = list[i];
+            var faxis = parseInt(box.model[axis]);
+            var flength = parseInt(box.model[length]);
+            var saxis = parseInt(box.model[otheraxis]);
+            var slength = parseInt(box.model[otherlength]);
+            var boxedge = {};
+            boxedge[otheraxis] = box.model[otheraxis] + slength;
+            boxedge[axis] = faxis;
+            
+            console.log("start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
+            console.dir({boxmodel: box.model, boxedge: boxedge});
+            // check if target is within any boxes
+            //if(faxis+flength > target[axis] && faxis < target[axis]) // target[axis] is within the box axis
+            //{
+                //if(saxis+slength > target[otheraxis] && saxis < target[otheraxis]) // target[axis] is within the box axis
+                if(this.intersect(start, target, box.model, boxedge))
                 {
                     console.log("collission");
                     // Collission. Stop before, chage dir and break
                     rv[axis] = parseInt(box.model[axis]) - this.margin;
-                    rv[otheraxis] = start[otheraxis];
-                    
+                    rv[otheraxis] = start[otheraxis];                    
                     break;
                 }                 
+            //}   
             }
-            else
+            catch(e)
             {
-                  // Nope, we're clean. return target.
-                  //console.log("no collission.");
-                  rv = target;
+                console.log("ERROR**** "+e);   
             }
-
+            console.log("loop..");
         }        
         rv.dir = start.dir;
-        console.log("+++ getGoodPointFor called. returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
+        console.log("+++ getGoodPointFor called. axis = '"+axis+"', otheraxis = '"+otheraxis+"', returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
+        return rv;
+    },
+    
+    ccw: function(A,B,C)
+    {
+        return (C.y-A.y)*(B.x-A.x) > (B.y-A.y)*(C.x-A.x);
+    },
+    
+    intersect: function(A,B,C,D)
+    {
+        var rv = this.ccw(A,C,D) != this.ccw(B,C,D) && this.ccw(A,B,C) != this.ccw(A,B,D);;
+        console.log("intersect says "+rv);
         return rv;
     }
-    
 });

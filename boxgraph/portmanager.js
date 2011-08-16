@@ -23,19 +23,19 @@ dojo.declare("boxgraph.portmanager",  null ,
         {                        
             if(arg)
             {
-                console.log("portmanager highlight subsciption event. highlight port is now "+arg.name);
+                //console.log("portmanager highlight subsciption event. highlight port is now "+arg.name);
                 this.highlightport = arg;   
             }
             else
             {
-                console.log("** portmanager highlight subsciption event. highlightport is now deselected.");
+                //console.log("** portmanager highlight subsciption event. highlightport is now deselected.");
                 this.highlightport = null;
             }
         }));
         
         this.surface.connect("onmousedown", dojo.hitch(this, function(e)
         {
-            console.log("boxgraph.portmanager onmousedown event handler. this.highlightport = "+this.highlightport);
+            //console.log("boxgraph.portmanager onmousedown event handler. this.highlightport = "+this.highlightport);
             if(this.highlightport && !this.firstport)
             {               
                 this.firstport = this.highlightport;   
@@ -47,7 +47,7 @@ dojo.declare("boxgraph.portmanager",  null ,
     
     startConnect: function(e)
     {
-        console.log("startconnect for port "+this.name+" called");
+        //console.log("startconnect for port "+this.name+" called");
         this.drawLineEvent = this.surface.connect("onmousemove", this, this.drawLine);
         this.mouseupevent = this.surface.connect("onmouseup", this, this.stopConnect);
         dojo.connect(this.surface, "ondragstart",   dojo, "stopEvent");
@@ -72,7 +72,7 @@ dojo.declare("boxgraph.portmanager",  null ,
     
     stopConnect: function(e)
     {
-        console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+        //console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
         dojo.disconnect(this.drawLineEvent);
         dojo.disconnect(this.mouseupevent);
         this.drawLineEvent = null;
