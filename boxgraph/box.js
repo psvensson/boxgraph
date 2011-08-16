@@ -63,10 +63,10 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", where = '"+port.where+"', position = "+port.position);
+            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
-            switch(port.where)
+            switch(port.dir)
             {
                 case "left":
                     x = -10;

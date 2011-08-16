@@ -17,30 +17,43 @@ dojo.declare("boxgraph.boxmanager", null,
     
     addBox: function(newbox)
     {
+        console.log("addBox called for "+newbox);
+        console.log("xlist is.:");
+        console.dir(this.xlist);
+        console.log("ylist is..");
+        console.dir(this.ylist);
         this.boxes.push(newbox);
         // Make sure we create ordered list for x and y coordinates, so we quickly can iterate from low to high
         var xindex = 0;
-        for(var x=0; x< this.xlist.length; x++)
+        if(this.xlist.length == 0)
         {
-            var xbox = this.xlist[x];
-            if(xbox.model.x > newbox.model.x)
-            {
-                xindex = x;
-                break;
-            }
+            this.xlist.push(newbox);
+            this.ylist.push(newbox);
         }
-        this.xlist.splice(xindex, 1, newbox); 
-        var yindex = 0;
-        for(var y=0; y< this.ylist.length; y++)
+        else
         {
-            var ybox = this.ylist[y];
-            if(ybox.model.y > newbox.model.y)
+            for(var x=0; x< this.xlist.length; x++)
             {
-                yindex = y;
-                break;
+                var xbox = this.xlist[x];
+                if(xbox.model.x > newbox.model.x)
+                {
+                    xindex = x;
+                    break;
+                }
             }
-        }
-        this.ylist.splice(yindex, 1, newbox); 
+            this.xlist.splice(xindex, 0, newbox); 
+            var yindex = 0;
+            for(var y=0; y< this.ylist.length; y++)
+            {
+                var ybox = this.ylist[y];
+                if(ybox.model.y > newbox.model.y)
+                {
+                    yindex = y;
+                    break;
+                }
+            }
+            this.ylist.splice(yindex, 0, newbox);
+        }        
     },
     
     getBoxes: function()
@@ -64,6 +77,8 @@ dojo.declare("boxgraph.boxmanager", null,
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
         var otheraxis = (dir == "up" || dir == "down") ? "x" : "y";
         
+        console.log("getGoodPointFor called. dir='"+dir+"', list.length="+list.length+", axis='"+axis+"', otheraxis='"+otheraxis+"'");
+        
         var length          = (dir == "up" || dir == "down") ? "height" : "width";
         var otherlength     = (dir == "up" || dir == "down") ? "width" : "height";
         
@@ -80,20 +95,29 @@ dojo.declare("boxgraph.boxmanager", null,
             for(var i = 1; i < list.length; i++)
             {
                 var box = list[i];
-                // Do we have a gap between the boxes?
+                // check if target is within any boxes
                 if(parseInt(box.model[axis])+parseInt(box.model[length]) > target[axis] && parseInt(box.model[axis]) < target[axis]) // target[axis] is within the box axis
                 {
                     if(parseInt(box.model[otheraxis])+parseInt(box.model[otherlength]) > target[otheraxis] && parseInt(box.model[otheraxis]) < target[otheraxis]) // target[axis] is within the box axis
                     {
+                        console.log("collission");
                         // Collission. Stop before, chage dir and break
                         rv[axis] = parseInt(box.model[axis]) - this.margin;
                         rv[otheraxis] = starts[otheraxis];
+                        
                         break;
                     }                 
-                }                
+                }
+                else
+                {
+                      // Nope, we're clean. return target.
+                      console.log("no collission.");
+                      rv = target;
+                }
+
             } 
         }       
-        
+        rv.dir = start.dir;
         return rv;
     }
     

@@ -33,18 +33,18 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
     test: function()
     {
         var block1 = new boxgraph.box({surface: this.surface, model: {name:"foo", x:100, y: 150, height:100, width: 100} });
-        block1.addPort({ where: "right", position: 1});
-        block1.addPort({ where: "right", position: 2});
-        block1.addPort({ where: "left", position: 1});
-        block1.addPort({ where: "top", position: 1});
-        block1.addPort({ where: "bottom", position: 1});
+        block1.addPort({ dir: "right", position: 1});
+        block1.addPort({ dir: "right", position: 2});
+        block1.addPort({ dir: "left", position: 1});
+        block1.addPort({ dir: "top", position: 1});
+        block1.addPort({ dir: "bottom", position: 1});
         this.boxmanager.addBox(block1);
         var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:260, y: 90, height:100, width: 100} });
-        block2.addPort({ where: "left", position: 1});
-        block2.addPort({ where: "right", position: 1});
-        block2.addPort({ where: "top", position: 1});
-        block2.addPort({ where: "bottom", position: 1});
-        block2.addPort({ where: "bottom", position: 2});
+        block2.addPort({ dir: "left", position: 1});
+        block2.addPort({ dir: "right", position: 1});
+        block2.addPort({ dir: "top", position: 1});
+        block2.addPort({ dir: "bottom", position: 1});
+        block2.addPort({ dir: "bottom", position: 2});
         this.boxmanager.addBox(block2);
         
         this.addEntity(block1);  

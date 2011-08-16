@@ -9,7 +9,7 @@ dojo.declare("boxgraph.port",  null ,
     side                : 10,
     x                   : 0,
     y                   : 0,
-    where               : "",  // "right", "left", "top", "bottom"
+    dir               : "",  // "right", "left", "top", "bottom"
 
     constructor: function(args)
     {
@@ -17,7 +17,7 @@ dojo.declare("boxgraph.port",  null ,
         console.log("boxgraph.port constructor. args are "+args);
         this.x = args.x;
         this.y = args.y;
-        this.where = args.where;
+        this.dir = args.dir;
         this.position = args.position;
         this.surface = args.surface;
         this.name = args.name;
