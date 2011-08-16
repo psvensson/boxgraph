@@ -33,7 +33,8 @@ dojo.declare("boxgraph.connector",  null ,
         this.surface = args.surface;
         this.boxmanager = args.boxmanager;
         
-        this.manhattan = new boxgraph.routing.manhattan({boxmanager: this.boxmanager});
+        //this.manhattan = new boxgraph.routing.manhattan({boxmanager: this.boxmanager});
+        this.manhattan = new boxgraph.routing.manhattan2({boxmanager: this.boxmanager});
         this.straight = new boxgraph.routing.straight({boxmanager: this.boxmanager});
     	this.curved = new boxgraph.routing.curved({boxmanager: this.boxmanager});
         

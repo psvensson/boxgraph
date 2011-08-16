@@ -46,7 +46,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     // Uses the boxmanager to search for the next empty space for a given direction. E.g. a coordinate which is not inside a box in the line of directions.
     getNextPoint: function(dir, startpoint, sp)
     {
-        var goodpoint = this.boxmanager.getGoodPointFor(dir, start, dest);
+        var goodpoint = this.boxmanager.getGoodPointFor(dir, startpoint, sp);
         return goodpoint;
     }
 });
