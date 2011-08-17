@@ -11,15 +11,19 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     },
     
     // fp - firstport - beginning, sp - secondport - end
-    getRouting: function(fp, sp)
+    getRouting: function(fp, secondport)
     {        
         console.log("--- getRouting called.");
+        var sp = {x: secondport.x + 5, y: secondport.y, dir: secondport.dir}; 
         console.dir({fp: fp, sp: sp});
         var nextpoint = { x: fp.x + 5, y: fp.y + 5, dir: fp.dir };
         var rv = [nextpoint]; // Returns an array of {x:0, y:0} objects, beginning at fp
+        nextpoint = this.getPaddingFor(nextpoint);
+        rv.push(nextpoint);
         var count = 0;
-        while(!(Math.abs(nextpoint.x - sp.x) < 11 && Math.abs(nextpoint.y == sp.y) < 11 )) // Loop until the next point _is_ our destination
-        {
+        var absx = 100, absy = 100;
+        while(!(absx < 21 && absy < 21 )) // Loop until the next point _is_ our destination
+        {            
             if(count++ > this.sanitycheck)
             {
                 console.log("*** Sanity Check Fault. More than "+this.sanitycheck+" while loops to get points for route!");
@@ -28,7 +32,9 @@ dojo.declare("boxgraph.routing.manhattan2", null,
             //var dir = this.getDirection(nextpoint, sp); // If sp.x > fp.x and fp is located 'up', then direction is left
             //nextpoint.dir = dir;
             nextpoint = this.getNextPoint(nextpoint, sp);
-            
+            absx = Math.abs(nextpoint.x - sp.x);
+            absy = Math.abs(nextpoint.y - sp.y);
+            console.log("getRouting nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y+", dir = '"+nextpoint.dir+"', absx = "+absx+", absy = "+absy);
             rv.push(nextpoint);
         }
         console.log("+++ getRouting while loop done. nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y);
@@ -43,7 +49,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     {
        // console.log("=== getDirection for direction '"+fp.dir+"' called");
         var dir = -1;
-        if(fp.dir == -1) throw ("WTF!!!");
+        if(fp.dir == -1) throw ("getDirection called with dir ==-1 WTF!!!");
         switch(fp.dir)
         {
             case "up":
@@ -57,6 +63,27 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         }
         //console.log("=== getDirection for direction '"+fp.dir+"', returns '"+dir+"'");
         return dir;
+    },
+    
+    getPaddingFor: function(point)
+    {
+      var rv = {x: point.x, y: point.y, dir: point.dir};
+      switch(point.dir)
+      {
+        case "up":
+            rv.y -= 10;
+            break;
+        case "down":
+            rv.y += 10;
+            break;
+        case "right":
+            rv.x += 10;
+            break;
+        case "left":
+            rv.x -= 10;
+            break;
+      }
+      return rv;
     },
     
     // Uses the boxmanager to search for the next empty space for a given direction. E.g. a coordinate which is not inside a box in the line of directions.

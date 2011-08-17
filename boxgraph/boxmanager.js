@@ -6,7 +6,7 @@ dojo.declare("boxgraph.boxmanager", null,
     boxes:      [],
     xlist:      [],
     ylist:      [],
-    margin:     -5, // Margin in Canvas px that we want a gap between boxes to have
+    margin:     20, // Margin in Canvas px that we want a gap between boxes to have
     
     constructor: function()
     {
@@ -84,8 +84,9 @@ dojo.declare("boxgraph.boxmanager", null,
         var otherlength     = (dir == "up" || dir == "down") ? "width" : "height";
         
         var target={};
-        target[otheraxis]   = start[otheraxis]  ;
-        target[axis]        = dest[axis] - this.margin;
+        target[otheraxis]   = dest[otheraxis]  ;
+        target[axis]        = start[axis] ;
+        console.log("getGoodPointFor -- dir = "+dir+",  start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
         // Now we have a target point
         
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
@@ -96,40 +97,47 @@ dojo.declare("boxgraph.boxmanager", null,
         {
             try
             {
-            //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
-            var box = list[i];
-            var faxis = parseInt(box.model[axis]);
-            var flength = parseInt(box.model[length]);
-            var saxis = parseInt(box.model[otheraxis]);
-            var slength = parseInt(box.model[otherlength]);
-            var boxedge = {};
-            boxedge[otheraxis] = box.model[otheraxis] + slength;
-            boxedge[axis] = faxis;
-            
-            console.log("start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
-            console.dir({boxmodel: box.model, boxedge: boxedge});
-            // check if target is within any boxes
-            //if(faxis+flength > target[axis] && faxis < target[axis]) // target[axis] is within the box axis
-            //{
-                //if(saxis+slength > target[otheraxis] && saxis < target[otheraxis]) // target[axis] is within the box axis
-                if(this.intersect(start, target, box.model, boxedge))
+                //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
+                var box = list[i];                
+           
+                if(this.intersectBox(start, target, box.model))
                 {
-                    console.log("collission");
+                    var rva = parseInt(start[axis]) ;
+                    var rvo = parseInt(box.model[otheraxis] - this.margin) ;
+                    console.log("    collission. setting rv["+axis+"] to box.model["+axis+"] "+(box.model[axis])+" + this.margin "+this.margin+" == "+rva+", rv["+otheraxis+"] to dest["+otheraxis+"] "+dest[otheraxis]+" + this.margin == "+rvo);
                     // Collission. Stop before, chage dir and break
-                    rv[axis] = parseInt(box.model[axis]) + this.margin;
-                    rv[otheraxis] = start[otheraxis] ;                    
+                    rv[axis]        = rva;
+                    rv[otheraxis]   = rvo;                    
                     break;
-                }                 
-            //}   
+                }              
             }
             catch(e)
             {
                 console.log("ERROR**** "+e);   
-            }
-            console.log("loop..");
+            }           
         }        
         rv.dir = start.dir;
-        console.log("+++ getGoodPointFor called. axis = '"+axis+"', otheraxis = '"+otheraxis+"', returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
+        //console.log("+++ getGoodPointFor called. axis = '"+axis+"', otheraxis = '"+otheraxis+"', returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
+        return rv;
+    },
+    
+    intersectBox: function(start, end, box)
+    {
+        
+        var rv = false;
+        var startwithinx = start.x > box.x && start.x < box.x + box.width;
+        var startwithiny = start.y > box.y && start.y < box.y + box.height;
+        
+        var endwithinx = end.x > box.x && end.x < box.x + box.width;
+        var endwithiny = end.y > box.y && end.y < box.y + box.height;
+        
+        var crossx = start.x < box.x && end.x > box.x + box.width;
+        var crossy = start.y < box.y && end.y > box.y + box.height;
+        //console.log("  intersectBox startwithinx = "+startwithinx+", startwithiny = "+startwithiny+", endwithinx = "+endwithinx+", endwithiny = "+endwithiny+", crossx = "+crossx+", crossy = "+crossy);
+        if ((startwithiny && endwithiny && crossx ) || (startwithinx && endwithinx && crossy) || (startwithiny && endwithiny) || (startwithinx && endwithinx))
+        {
+            rv = true;   
+        }
         return rv;
     },
     
