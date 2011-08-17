@@ -36,13 +36,13 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
         block1.addPort({ dir: "right", position: 1});
         block1.addPort({ dir: "right", position: 2});
         block1.addPort({ dir: "left", position: 1});
-        block1.addPort({ dir: "top", position: 1});
+        block1.addPort({ dir: "up", position: 1});
         block1.addPort({ dir: "down", position: 1});
         this.boxmanager.addBox(block1);
         var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:250, y: 100, height:100, width: 100} });
         block2.addPort({ dir: "left", position: 1});
         block2.addPort({ dir: "right", position: 1});
-        block2.addPort({ dir: "top", position: 1});
+        block2.addPort({ dir: "up", position: 1});
         block2.addPort({ dir: "down", position: 1});
         block2.addPort({ dir: "down", position: 2});
         this.boxmanager.addBox(block2);

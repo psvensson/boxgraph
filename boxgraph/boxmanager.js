@@ -6,7 +6,7 @@ dojo.declare("boxgraph.boxmanager", null,
     boxes:      [],
     xlist:      [],
     ylist:      [],
-    margin:     20, // Margin in Canvas px that we want a gap between boxes to have
+    margin:     14, // Margin in Canvas px that we want a gap between boxes to have
     
     constructor: function()
     {
@@ -75,6 +75,10 @@ dojo.declare("boxgraph.boxmanager", null,
     {
         var rv = {x: -1, y: -1, dir: "whatever"};
         var dir = start.dir;
+        if(dir == -1)
+        {
+            throw("''''' ARGH!! ''''");   
+        }
         
         var list = (dir == "up" || dir == "down") ? this.ylist : this.xlist;
         var axis = (dir == "up" || dir == "down") ? "y" : "x";
@@ -105,7 +109,7 @@ dojo.declare("boxgraph.boxmanager", null,
                     var rva = parseInt(start[axis]) ;
                     var rvo = parseInt(box.model[otheraxis] - this.margin) ;
                     console.log("    collission. setting rv["+axis+"] to box.model["+axis+"] "+(box.model[axis])+" + this.margin "+this.margin+" == "+rva+", rv["+otheraxis+"] to dest["+otheraxis+"] "+dest[otheraxis]+" + this.margin == "+rvo);
-                    // Collission. Stop before, chage dir and break
+                    // Collission. Sup before, chage dir and break
                     rv[axis]        = rva;
                     rv[otheraxis]   = rvo;                    
                     break;
@@ -117,7 +121,7 @@ dojo.declare("boxgraph.boxmanager", null,
             }           
         }        
         rv.dir = start.dir;
-        //console.log("+++ getGoodPointFor called. axis = '"+axis+"', otheraxis = '"+otheraxis+"', returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
+        console.log("+++ getGoodPointFor called. axis = '"+axis+"', otheraxis = '"+otheraxis+"', returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
         return rv;
     },
     

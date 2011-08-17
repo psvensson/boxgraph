@@ -72,7 +72,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
                     x = -10;
                     y = port.position * jiff;
                 break;
-                case "top":
+                case "up":
                     x = port.position * jiff;
                     y = -10;
                 break;
