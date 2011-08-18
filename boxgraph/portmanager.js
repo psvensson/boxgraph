@@ -49,9 +49,9 @@ dojo.declare("boxgraph.portmanager",  null ,
     {
         //console.log("startconnect for port "+this.name+" called");
         this.drawLineEvent = this.surface.connect("onmousemove", this, this.drawLine);
-        this.mouseupevent = this.surface.connect("onmouseup", this, this.supConnect);
-        dojo.connect(this.surface, "ondragstart",   dojo, "supEvent");
-        dojo.connect(this.surface, "onselectstart", dojo, "supEvent");
+        this.mouseupevent = this.surface.connect("onmouseup", this, this.stopConnect);
+        dojo.connect(this.surface, "ondragstart",   dojo, "stopEvent");
+        dojo.connect(this.surface, "onselectstart", dojo, "stopEvent");
     },
     
     drawLine: function(e)
@@ -70,9 +70,9 @@ dojo.declare("boxgraph.portmanager",  null ,
           this.line.setStroke({color: "#06799F", width: 1});
     },
     
-    supConnect: function(e)
+    stopConnect: function(e)
     {
-        //console.log("supConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+        //console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
         dojo.disconnect(this.drawLineEvent);
         dojo.disconnect(this.mouseupevent);
         this.drawLineEvent = null;

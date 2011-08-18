@@ -22,8 +22,8 @@ dojo.declare("boxgraph.connector",  null ,
     constructor: function(args)
     {
     	this.inherited(arguments);
-        console.log("boxgraph.connector constructor called. args are...");
-        console.dir(args);
+        //console.log("boxgraph.connector constructor called. args are...");
+        //console.dir(args);
         if(!args.firstport || !args.secondport)
         {
             //throw "Y U NO BOTH FIRST AND SECOND PORTS!!!?";   

@@ -12,8 +12,7 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 {
 	templatePath			: dojo.moduleUrl("boxgraph", "editor.html"),
     surface                 : "", // Can be provided, otherwise we create a new surface
-    entities                : [],
-    
+   
     //06799F    216278	024E68	3AAACF	62B4CF
     
     postCreate: function()
@@ -39,22 +38,25 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
         block1.addPort({ dir: "up", position: 1});
         block1.addPort({ dir: "down", position: 1});
         this.boxmanager.addBox(block1);
-        var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:250, y: 100, height:100, width: 100} });
+        var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:270, y: 90, height:100, width: 100} });
         block2.addPort({ dir: "left", position: 1});
         block2.addPort({ dir: "right", position: 1});
         block2.addPort({ dir: "up", position: 1});
         block2.addPort({ dir: "down", position: 1});
         block2.addPort({ dir: "down", position: 2});
         this.boxmanager.addBox(block2);
+        var block3 = new boxgraph.box({surface: this.surface, model: {name: "baz", x:200, y: 290, height:100, width: 100} });
+        block3.addPort({ dir: "left", position: 1});
+        block3.addPort({ dir: "right", position: 1});
+        block3.addPort({ dir: "up", position: 1});
+        block3.addPort({ dir: "left", position: 2});
+        block3.addPort({ dir: "down", position: 2});
+        this.boxmanager.addBox(block3);
         
-        this.addEntity(block1);  
-        this.addEntity(block2);
+        //this.addEntity(block1);  
+        //this.addEntity(block2);
         block1.render();
         block2.render();
-    },
-    
-    addEntity: function(e)
-    {
-        this.entities.push(e);
+        block3.render();
     }
 });
