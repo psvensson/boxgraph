@@ -59,7 +59,7 @@ dojo.declare("boxgraph.connector",  null ,
         console.log("got route of type '"+this.routing+"' ;");
         console.dir(ll);
         this.line = ll.x1 ? this.surface.createLine(ll) : this.surface.createPolyline(ll);
-        this.line.setStroke({color: "#06799F", width: 1});   
+        this.line.setStroke({color: "#36A9CF", width: 1});   
         console.log("--------------------------------------------------");
     },
     

@@ -6,7 +6,7 @@ dojo.declare("boxgraph.boxmanager", null,
     boxes:      [],
     xlist:      [],
     ylist:      [],
-    margin:     10, // Margin in Canvas px that we want a gap between boxes to have
+    margin:     0, // Margin in Canvas px that we want a gap between boxes to have
     
     constructor: function()
     {
@@ -84,7 +84,7 @@ dojo.declare("boxgraph.boxmanager", null,
         var target={};
         target[otheraxis]   = dest[otheraxis];
         target[axis]        = start[axis] ;
-        console.log("getGoodPointFor -- dir = "+dir+",  start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++ getGoodPointFor -- dir = "+dir+",  start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
         // Now we have a target point
         
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
@@ -125,10 +125,7 @@ dojo.declare("boxgraph.boxmanager", null,
                 {
                     //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
                     var box = list[i];                
-                    var collision = this.intersectBox(start, target, box.model);
-                    //
-                    // TODO: If a collision occurs, tag the returned point that the next point is going to find the side of the collided box instead of ultimate target
-                    //
+                    var collision = this.intersectBox(start, target, box.model);                   
                     if(collision.x)
                     {
                         console.dir(collision);                                 
@@ -181,29 +178,52 @@ dojo.declare("boxgraph.boxmanager", null,
         var endwithinx = end.x > box.x && end.x < box.x + box.width;
         var endwithiny = end.y > box.y && end.y < box.y + box.height;
         
-        var crossxr = start.x > box.x + box.width  && end.x < box.x ;
-        var crossxl = end.x > box.x + box.width  && start.x < box.x ;
+        var crossxr = start.x > box.x + box.width+1  && end.x < box.x+1 ;
+        var crossxl = end.x > box.x + box.width-1  && start.x < box.x-1 ;
         
-        var crossyr = start.y > box.y + box.height && end.y < box.y;
-        var crossyl = end.y > box.y + box.height && start.y < box.y;
+        var crossyr = start.y > box.y + box.height+1 && end.y < box.y+1;
+        var crossyl = end.y > box.y + box.height-1 && start.y < box.y-1;
+        
+        console.dir({start:start,end:end,box:box});
+        var crossx = false, crossy = false;
         
         //console.log("  intersectbox start.x = "+start.x+", start.y = "+start.y+", end.x = "+end.x+", end.y = "+end.y+", box.x = "+box.x+", box.y = "+box.y+", box.x+width = "+(box.x+box.width)+", box.y+height = "+(box.y+box.height));
-        //console.log("    intersectBox startwithinx = "+startwithinx+", startwithiny = "+startwithiny+", endwithinx = "+endwithinx+", endwithiny = "+endwithiny+", crossxr = "+crossxr+", crossxl = "+crossxl+", crossyr = "+crossyr+", crossyl = "+crossyl);
-        if (startwithiny && endwithiny && (crossxr || crossxl) )
+        console.log("    intersectBox startwithinx = "+startwithinx+", startwithiny = "+startwithiny+", endwithinx = "+endwithinx+", endwithiny = "+endwithiny+", crossxr = "+crossxr+", crossxl = "+crossxl+", crossyr = "+crossyr+", crossyl = "+crossyl);
+        if ((startwithiny || endwithiny) && (crossxr || crossxl))
         {            
+            console.log(" + matches (startwithiny || endwithiny) && (crossxr || crossxl) +");
+            crossx = true;
+        }
+        if ((startwithinx || endwithinx) && (startwithiny || endwithiny))
+        {
+            console.log(" + matches (startwithinx || endwithinx) && (startwithiny || endwithiny) +");
+            crossy = true;   
+        }
+        else if ((startwithinx || endwithinx) && (crossyr || crossyl) )
+        {
+            console.log(" + matches (startwithinx || endwithinx) && (crossyr || crossyl) +");
+            crossy = true;
+        }
+        if((startwithiny || endwithiny) && (endwithinx || startwithinx))
+        {
+            console.log(" + matches (startwithiny || endwithiny) && (endwithinx || startwithinx) +");
+            crossy = true;    
+        }
+        
+        if(crossx)
+        {
             console.log("      Collision crossx!");
             rv.x    = crossxr ? box.x + box.width + 30 : box.x - 30;
             //rv.y    = end.y < box.y + box.height/2 ? box.y - 30 : box.y + box.height + 30;         
-            rv.y = end.y;
+            rv.y = end.y;   
         }
-        else if (startwithinx && endwithinx && (crossyr || crossyl)) 
+        if(crossy)
         {
             console.log("      Collision crossy!");
             //rv.x    = end.x < box.x + box.width/2 ? box.x - 30 : box.x + box.width + 30;
             rv.x = end.x;
-            rv.y    = crossyr ? box.y + box.height + 30 : box.y - 30;
+            rv.y    = crossyr ? box.y + box.height + 30 : box.y - 30;   
         }
-        
         // TODO: When the target point is at a right angle to the rv point and the rv collision point is in its path, this will lead to 'oscillation' where getGoodPointFor will give same point all the time
         // It will want to 
         
