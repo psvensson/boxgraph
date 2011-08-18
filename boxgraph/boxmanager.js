@@ -115,6 +115,7 @@ dojo.declare("boxgraph.boxmanager", null,
                     rv.y = parseInt(rv.y < midy ? collidedwith.y - 30 : collidedwith.y + collidedwith.height + 30);
                 break;
             }
+            delete start.collidedwith;
         }
         else
         {

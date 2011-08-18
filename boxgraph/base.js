@@ -9,8 +9,16 @@ dojo.declare("boxgraph.base", null,
     
     constructor: function(args)
     {
+        try
+        {
         this.model = args.model;
         this.surface = args.surface;
+        }
+        catch(e)
+        {
+         console.log("WTF!!!! ** trying to create box without arguments eh??!! : "+e);
+         throw("WTF!!");
+        }
     },
     
     /*
