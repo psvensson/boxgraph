@@ -91,29 +91,58 @@ dojo.declare("boxgraph.boxmanager", null,
         // We need to see if there are any boxes which block the way to dest[axis] and end the chase there.        
             
         rv = target; // default
-        for(var i = 0; i < list.length; i++)
+        if(start.collidedwith)
         {
-            try
+            // We collided with a box last point. This point must find a way to clear the box.
+            // The collission occured because our target was behind the box, somwhere. That means we must move sideways.
+            // If the start point direction is up, we must go either left or right (with margin) to clear the box.
+            var collidedwith = start.collidedwith.model;
+            console.log("last point was a collision with");
+            console.dir(collidedwith);
+            var midx = collidedwith.x + collidedwith.width/2;
+            var midy = collidedwith.y + collidedwith.height/2;
+            console.log("midx = "+midx+", midy = "+midy);
+            switch(start.dir)
             {
-                //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
-                var box = list[i];                
-                var collision = this.intersectBox(start, target, box.model);
-                //
-                // TODO: If a collision occurs, tag the returned point that the next point is going to find the side of the collided box instead of ultimate target
-                //
-                if(collision.x)
-                {
-                    console.dir(collision);                                 
-                    rv = collision;
-                    //console.log("      Collission detected...");
-                    break;
-                }              
+                case "up":
+                case "down":
+                    rv.x = parseInt(rv.x < midx ? collidedwith.x - 30 : collidedwith.x + collidedwith.width + 30);
+                    rv.y = start.y;
+                break;
+                case "right":
+                case "left":
+                    rv.x = start.x;
+                    rv.y = parseInt(rv.y < midy ? collidedwith.y - 30 : collidedwith.y + collidedwith.height + 30);
+                break;
             }
-            catch(e)
+        }
+        else
+        {
+            for(var i = 0; i < list.length; i++)
             {
-                console.log("ERROR**** "+e);   
-            }           
-        }        
+                try
+                {
+                    //console.log("+++++++++++++++++++++++ checking box "+i+" of "+list.length);
+                    var box = list[i];                
+                    var collision = this.intersectBox(start, target, box.model);
+                    //
+                    // TODO: If a collision occurs, tag the returned point that the next point is going to find the side of the collided box instead of ultimate target
+                    //
+                    if(collision.x)
+                    {
+                        console.dir(collision);                                 
+                        rv = collision;
+                        rv.collidedwith = box;
+                        //console.log("      Collission detected...");
+                        break;
+                    }              
+                }
+                catch(e)
+                {
+                    console.log("ERROR**** "+e);   
+                }           
+            }        
+        }
         rv.dir = start.dir;
         console.log("+++ getGoodPointFor returning x: "+rv.x+", y: "+rv.y+", dir: "+rv.dir);
         return rv;
@@ -163,12 +192,14 @@ dojo.declare("boxgraph.boxmanager", null,
         {            
             console.log("      Collision crossx!");
             rv.x    = crossxr ? box.x + box.width + 30 : box.x - 30;
-            rv.y    = end.y < box.y + box.height/2 ? box.y - 30 : box.y + box.height + 30;         
+            //rv.y    = end.y < box.y + box.height/2 ? box.y - 30 : box.y + box.height + 30;         
+            rv.y = end.y;
         }
         else if (startwithinx && endwithinx && (crossyr || crossyl)) 
         {
             console.log("      Collision crossy!");
-            rv.x    = end.x < box.x + box.width/2 ? box.x - 30 : box.x + box.width + 30;
+            //rv.x    = end.x < box.x + box.width/2 ? box.x - 30 : box.x + box.width + 30;
+            rv.x = end.x;
             rv.y    = crossyr ? box.y + box.height + 30 : box.y - 30;
         }
         
