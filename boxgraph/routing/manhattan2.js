@@ -14,7 +14,8 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     getRouting: function(fp, secondport)
     {        
         console.log("--- getRouting called.");
-        var sp = {x: secondport.x + 5, y: secondport.y, dir: secondport.dir}; 
+        var sp = {x: secondport.x+5 , y: secondport.y+5, dir: secondport.dir}; 
+        //sp = this.boxmanager.getPaddingFor(sp);
         console.dir({fp: fp, sp: sp});
         var nextpoint = { x: fp.x + 5, y: fp.y + 5, dir: fp.dir };
         var rv = [nextpoint]; // Returns an array of {x:0, y:0} objects, beginning at fp
@@ -40,7 +41,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
         console.log("+++ getRouting while loop done. nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y);
         rv.push(nextpoint); // And add that as well. We're home.
         // Push last point
-        rv.push({ x: sp.x + 5, y: sp.y + 5, dir: sp.dir });
+        rv.push({ x: sp.x , y: sp.y , dir: sp.dir });
         return rv;
 	},
     
@@ -63,7 +64,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
                 dir = sp.y > fp.y ? "down" : "up";
             break;
         }
-        console.log("=== getDirection for direction '"+fp.dir+"', returns '"+dir+"'");
+        console.log("=== getDirection for direction '"+fp.dir+"', returns '"+dir+"', fp x,y = "+fp.x+","+fp.y+", sp x,y = "+sp.x+","+sp.y);
         return dir;
     },
     

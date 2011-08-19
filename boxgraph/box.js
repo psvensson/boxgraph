@@ -10,8 +10,9 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     name                    : "",
     ports                   : [],
     
-    constructor: function()
+    constructor: function(args)
     {
+        console.log("boxgraph.box constructor");
         this.inherited(arguments);
         this.ports = [];
         console.log("boxgraph.box constructor. this.model is "+this.model);
