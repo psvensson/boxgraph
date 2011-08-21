@@ -44,6 +44,10 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         this.flush();
         this.renderEntity();
         this.renderPorts();  
+        var nx = this.model.x + this.model.width / 2 - 4 * this.name.length;
+        var ny = this.model.y + this.model.height / 2;
+        console.log("++ drawing name '"+this.name+"' for box at "+nx+", "+ny);
+        this.surface.createText({text: this.name, x: nx, y: ny}).setFill("black");
     },
     
     renderEntity: function()

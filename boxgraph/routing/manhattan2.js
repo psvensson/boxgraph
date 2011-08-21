@@ -32,7 +32,10 @@ dojo.declare("boxgraph.routing.manhattan2", null,
             }
             //var dir = this.getDirection(nextpoint, sp); // If sp.x > fp.x and fp is located 'up', then direction is left
             //nextpoint.dir = dir;
+            console.log("Calling getNetGoodPoint for...");
+            console.dir({fp: nextpoint, sp: sp});
             nextpoint = this.getNextPoint(nextpoint, sp);
+            
             absx = Math.abs(nextpoint.x - sp.x);
             absy = Math.abs(nextpoint.y - sp.y);
             //console.log("getRouting nextpoint.x = "+nextpoint.x+", nextpoint.y = "+nextpoint.y+", sp.x = "+sp.x+", sp.y = "+sp.y+", dir = '"+nextpoint.dir+"', absx = "+absx+", absy = "+absy);

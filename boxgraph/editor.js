@@ -31,32 +31,40 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
     
     test: function()
     {
-        var block1 = new boxgraph.box({surface: this.surface, model: {name:"foo", x:100, y: 100, height:100, width: 100} });
+        var block1 = new boxgraph.box({surface: this.surface, model: {name:"foo", x:50, y: 100, height:100, width: 100} });
         block1.addPort({ dir: "right", position: 1});
         block1.addPort({ dir: "right", position: 2});
         block1.addPort({ dir: "left", position: 1});
         block1.addPort({ dir: "up", position: 1});
         block1.addPort({ dir: "down", position: 1});
         this.boxmanager.addBox(block1);
-        var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:270, y: 90, height:100, width: 100} });
+        var block2 = new boxgraph.box({surface: this.surface, model: {name: "bar", x:200, y: 50, height:150, width: 100} });
         block2.addPort({ dir: "left", position: 1});
         block2.addPort({ dir: "right", position: 1});
         block2.addPort({ dir: "up", position: 1});
         block2.addPort({ dir: "down", position: 1});
         block2.addPort({ dir: "down", position: 2});
         this.boxmanager.addBox(block2);
-        var block3 = new boxgraph.box({surface: this.surface, model: {name: "baz", x:200, y: 290, height:100, width: 100} });
+        var block3 = new boxgraph.box({surface: this.surface, model: {name: "baz", x:150, y: 290, height:100, width: 100} });
         block3.addPort({ dir: "left", position: 1});
         block3.addPort({ dir: "right", position: 1});
         block3.addPort({ dir: "up", position: 1});
         block3.addPort({ dir: "left", position: 2});
-        block3.addPort({ dir: "down", position: 2});
+        block3.addPort({ dir: "down", position: 1});
         this.boxmanager.addBox(block3);
+        var block4 = new boxgraph.box({surface: this.surface, model: {name: "quux", x:340, y: 180, height:80, width: 130} });
+        block4.addPort({ dir: "left", position: 1});
+        block4.addPort({ dir: "right", position: 1});
+        block4.addPort({ dir: "up", position: 1});
+        block4.addPort({ dir: "left", position: 2});
+        block4.addPort({ dir: "down", position: 1});
+        this.boxmanager.addBox(block4);
         
         //this.addEntity(block1);  
         //this.addEntity(block2);
         block1.render();
         block2.render();
         block3.render();
+        block4.render();
     }
 });

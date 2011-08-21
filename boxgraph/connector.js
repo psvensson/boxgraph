@@ -59,6 +59,11 @@ dojo.declare("boxgraph.connector",  null ,
         console.log("got route of type '"+this.routing+"' ;");
         console.dir(ll);
         //this.line = ll.x1 ? this.surface.createLine(ll) : this.surface.createPolyline(ll);
+        // Debug failsafe
+        dojo.forEach(ll, function(l)
+        {
+           delete l.collidedwith; 
+        });
         this.line = this.surface.createPolyline(ll);
         console.log("polyline created");
         this.line.setStroke({color: "#36A9CF", width: 1});   
