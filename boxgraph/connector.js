@@ -40,6 +40,11 @@ dojo.declare("boxgraph.connector",  null ,
     	this.curved = new boxgraph.routing.curved({boxmanager: this.boxmanager});
         
         this.drawLine();
+        
+        dojo.subscribe("redraw", dojo.hitch(this, function()
+        {
+            this.flush();
+        }));
     },
     
     flush: function()
@@ -47,7 +52,7 @@ dojo.declare("boxgraph.connector",  null ,
       if(this.line)
       {
         this.surface.remove(this.line);
-        this.draawLine();
+        this.drawLine();
       }
     },
     

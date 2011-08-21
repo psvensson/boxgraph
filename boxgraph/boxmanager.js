@@ -1,5 +1,7 @@
 dojo.provide("boxgraph.boxmanager");
 
+dojo.require("dojox.gfx");
+dojo.require("dojox.gfx.move");
 
 dojo.declare("boxgraph.boxmanager", null,
 {
@@ -14,11 +16,20 @@ dojo.declare("boxgraph.boxmanager", null,
         this.boxes = [];
         this.xlist = [];
         this.ylist = [];
+        
+        dojo.subscribe("redraw", dojo.hitch(this, function()
+        {
+            dojo.forEach(this.boxes, function(box)
+            {
+                box.renderPorts();            
+            });
+        }));
     },
     
     addBox: function(newbox)
     {       
         this.boxes.push(newbox);
+        
         // Make sure we create ordered list for x and y coordinates, so we quickly can iterate from low to high
         var xindex = 0;
         if(this.xlist.length === 0)

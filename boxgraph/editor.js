@@ -62,9 +62,10 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
         
         //this.addEntity(block1);  
         //this.addEntity(block2);
-        block1.render();
-        block2.render();
-        block3.render();
-        block4.render();
+        block1.renderPorts();
+        block2.renderPorts();
+        block3.renderPorts();
+        block4.renderPorts();
+        
     }
 });
