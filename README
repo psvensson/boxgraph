@@ -1,3 +1,5 @@
+BOXGRAPH:
+
 BoxGraph is a small library to let you create an interface where your users can create conenctions between ports on boxes.
 The typical use-case could be workflow descriptions or creation and modification of connectedness in a graph model.
 
@@ -10,6 +12,16 @@ There are three types of entities;
 At the moment BoxGraph only supports Manhattan routing of connections, but will support Beziers in the future.
 
 BoxGraph is focused on user interaction, which generate events. The events are then consumed by the using application. However, BoxGraph could also be used to display a static graph without user interaction.
+
+USAGE:
+
+BoxGraph is built using Dojo's excellent OO system. This means you need to load Dojo before loading BoxGraph. Also, loading in Dojo is called 'dojo.require(..)'. This is not a killer for those of you who only
+use jQuery, since Dojo plays _very_ nice with other toolkits and is completely namespaced. E.g. it will not step on your toes as long as your own classes does not beign with 'dojo.'.
+
+Check out the test.html file for an example on how to include and use BoxGraph.
+
+Note: At the moment BoxGraph is very alpha and have some rough edges. In the class boxgraph/editor.js the function 'test' shows how to create four boxes with various ports. Soon there will be an event based interface
+which will make it much simpler to create different entities. If you have any suggestions, use the 'Issues' feature ogf github or mail me directly at psvensson@gmail.com
 
 TODO:
 
