@@ -76,7 +76,7 @@ dojo.declare("boxgraph.portmanager",  null ,
         dojo.disconnect(this.drawLineEvent);
         dojo.disconnect(this.mouseupevent);
         this.drawLineEvent = null;
-        if(!this.secondport)
+        if(!this.secondport && this.highlightport)
         {
             this.secondport = this.highlightport;
             console.log("** setting second port to "+this.secondport);
