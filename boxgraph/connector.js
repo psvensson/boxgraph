@@ -78,8 +78,9 @@ dojo.declare("boxgraph.connector",  null ,
         dojo.connect(this.shadowline.getNode(), "onmouseover", dojo.hitch(this, function(e)
         {
             this.shadowline.setStroke({color: [0, 0, 255, 0.1], width: 10, join: "round" });
-            this.shadowconnect = dojo.connect(this.shadowline.getNode(), "onmousedown", dojo.hitch(this, function(e)
+            this.shadowconnect = dojo.connect(this.shadowline.getNode(), "onclick", dojo.hitch(this, function(e)
             {
+                console.log("sending diconnect event..");
                 this.surface.remove(this.line);
                 this.surface.remove(this.shadowline);
                 dojo.publish("boxgraph_disconnect", [this.firstport, this.secondport]);
@@ -90,7 +91,7 @@ dojo.declare("boxgraph.connector",  null ,
             this.shadowline.setStroke({color: [0, 0, 0, 0.0], width: 10, join: "round" });
             if(this.shadowconnect)
             {
-                dojo.disconnet(this.shadowconnect);     
+                dojo.disconnect(this.shadowconnect);     
             }
         }));
         
