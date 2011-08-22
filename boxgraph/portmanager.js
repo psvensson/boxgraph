@@ -72,22 +72,31 @@ dojo.declare("boxgraph.portmanager",  null ,
     
     stopConnect: function(e)
     {
-        //console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
-        dojo.disconnect(this.drawLineEvent);
-        dojo.disconnect(this.mouseupevent);
-        this.drawLineEvent = null;
-        if(!this.secondport && this.highlightport)
+        console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport+", this.highlightport = "+this.highlightport);
+        try
         {
-            this.secondport = this.highlightport;
-            console.log("** setting second port to "+this.secondport);
+            dojo.disconnect(this.drawLineEvent);
+            dojo.disconnect(this.mouseupevent);
+            this.drawLineEvent = null;
+            
             if(this.line)
             {
                 this.surface.remove(this.line);
                 this.line = null;
             }
-            dojo.publish("boxgraph_connect", [this.firstport, this.secondport]);
-            this.connectors.push(new boxgraph.connector({boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
+            if(!this.secondport && this.highlightport)
+            {
+                this.secondport = this.highlightport;
+                console.log("** setting second port to "+this.secondport);
+                
+                dojo.publish("boxgraph_connect", [this.firstport, this.secondport]);
+                this.connectors.push(new boxgraph.connector({boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport}));                
+            }
             this.firstport = this.secondport = null;
-        }               
+        }
+        catch(e)
+        {
+            console.log("ERROR in stopConnect: "+e);   
+        }
     }
 });
