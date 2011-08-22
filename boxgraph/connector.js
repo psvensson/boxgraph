@@ -52,6 +52,7 @@ dojo.declare("boxgraph.connector",  null ,
       if(this.line)
       {
         this.surface.remove(this.line);
+        this.surface.remove(this.shadowline);
         this.drawLine();
       }
     },
@@ -70,11 +71,30 @@ dojo.declare("boxgraph.connector",  null ,
            delete l.collidedwith; 
         });
         this.line = this.surface.createPolyline(ll);
-        dojo.connect(this.line, "onclick", dojo.hitch(this, function(e)
+        // create a larger highlight to show on mouseover
+        this.shadowline = this.surface.createPolyline(ll);
+        
+    	this.shadowline.setStroke({color: [0, 0, 0, 0.0], width: 10, join: "round" });
+        dojo.connect(this.shadowline.getNode(), "onmouseover", dojo.hitch(this, function(e)
         {
-            this.surface.remove(this.line);
-            dojo.publish("boxgraph_disconnect", [this.firstport, this.secondport]);
+            this.shadowline.setStroke({color: [0, 0, 255, 0.1], width: 10, join: "round" });
+            this.shadowconnect = dojo.connect(this.shadowline.getNode(), "onmousedown", dojo.hitch(this, function(e)
+            {
+                this.surface.remove(this.line);
+                this.surface.remove(this.shadowline);
+                dojo.publish("boxgraph_disconnect", [this.firstport, this.secondport]);
+            }));
         }));
+        dojo.connect(this.shadowline.getNode(), "onmouseout", dojo.hitch(this, function(e)
+        {
+            this.shadowline.setStroke({color: [0, 0, 0, 0.0], width: 10, join: "round" });
+            if(this.shadowconnect)
+            {
+                dojo.disconnet(this.shadowconnect);     
+            }
+        }));
+        
+        
         console.log("polyline created");
         this.line.setStroke({color: "#36A9CF", width: 1});   
         console.log("----------------------------------------------------- route drawn ------------------------------------------------------------------");
