@@ -83,7 +83,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
                 port.x += shift.dx;
                 port.y += shift.dy;                
             }
-            dojo.publish("redraw");
+            dojo.publish("boxgraph_redraw");
     	}));
     },
     

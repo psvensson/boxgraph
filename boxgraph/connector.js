@@ -41,7 +41,7 @@ dojo.declare("boxgraph.connector",  null ,
         
         this.drawLine();
         
-        dojo.subscribe("redraw", dojo.hitch(this, function()
+        dojo.subscribe("boxgraph_redraw", dojo.hitch(this, function()
         {
             this.flush();
         }));
@@ -51,6 +51,7 @@ dojo.declare("boxgraph.connector",  null ,
     {
       if(this.line)
       {
+          console.log("connector flush redrawing line yohoo");
         this.surface.remove(this.line);
         this.surface.remove(this.shadowline);
         this.drawLine();

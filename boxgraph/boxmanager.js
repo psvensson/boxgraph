@@ -17,7 +17,7 @@ dojo.declare("boxgraph.boxmanager", null,
         this.xlist = [];
         this.ylist = [];
         
-        dojo.subscribe("redraw", dojo.hitch(this, function()
+        dojo.subscribe("boxgraph_redraw", dojo.hitch(this, function()
         {
             dojo.forEach(this.boxes, function(box)
             {
@@ -98,7 +98,7 @@ dojo.declare("boxgraph.boxmanager", null,
                 
         target[otheraxis]   = dest[otheraxis];
         target[axis]        = start[axis] ;
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++ getGoodPointFor -- dir = "+dir+",  start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
+        console.log("++++++++++++++++++++++++ getGoodPointFor -- dir = "+dir+",  start["+axis+"] = "+start[axis]+", start["+otheraxis+"] = "+start[otheraxis]+", target["+axis+"] = "+target[axis]+", target["+otheraxis+"] = "+target[otheraxis]);
         // Now we have a target point
         
         // We want to get from start[axis] to target[axis], e.g. start.x to target.x 
@@ -236,7 +236,7 @@ dojo.declare("boxgraph.boxmanager", null,
         
         var dir = (adiffx > adiffy) ? xdir : ydir;
         
-        console.log("  intersectBox calculated direction "+a.x+","+a.y+" -> "+b.x+","+b.y+" is '"+dir+"' because addiffx "+adiffx+" > adiffy "+adiffy+" (adiffx > adiffy) == "+(adiffx > adiffy));
+        //console.log("  intersectBox calculated direction "+a.x+","+a.y+" -> "+b.x+","+b.y+" is '"+dir+"' because addiffx "+adiffx+" > adiffy "+adiffy+" (adiffx > adiffy) == "+(adiffx > adiffy));
         var rv = {};
         var intup = false, intdown = false, intright = false, intleft = false;
         

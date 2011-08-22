@@ -10,7 +10,7 @@ dojo.declare("boxgraph.portmanager",  null ,
     firstnode               : "",
     secondnode              : "",
     connectors              : [],
-    boxmnanager             : "",
+    boxmanager              : "",
     
     constructor: function(args)
     {
@@ -42,6 +42,29 @@ dojo.declare("boxgraph.portmanager",  null ,
                 console.log("** setting first port to "+this.firstport);                               
                 this.startConnect();
             }
+        }));
+        
+        dojo.subscribe("boxgraph_disconnect", dojo.hitch(this, function(p1, p2)
+        {
+            var index = -1;
+            dojo.forEach(this.connectors, function(connector, i)
+            {
+                console.log(" boxgraph_disconnect checking if "+connector.firstport.name+" == "+p1.name+" and "+connector.secondport+" == "+p2.name);
+                if(connector.firstport == p1 && connector.secondport == p2)
+                {
+                    console.log("Yup index == "+index);
+                    connector.line = null;
+                    index = i;   
+                }
+            });
+            if(index > -1)
+            {
+                var oldconnector = this.connectors.splice(index, 1);
+                oldconnector.line = "";
+                delete oldconnector;
+            }
+            console.log("this.connectors is now..");
+            console.dir(this.connectors);
         }));
     },
     
