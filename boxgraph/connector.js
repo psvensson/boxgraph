@@ -70,6 +70,11 @@ dojo.declare("boxgraph.connector",  null ,
            delete l.collidedwith; 
         });
         this.line = this.surface.createPolyline(ll);
+        dojo.connect(this.line, "onclick", dojo.hitch(this, function(e)
+        {
+            this.surface.remove(this.line);
+            dojo.publish("boxgraph_disconnect", [this.firstport, this.secondport]);
+        }));
         console.log("polyline created");
         this.line.setStroke({color: "#36A9CF", width: 1});   
         console.log("----------------------------------------------------- route drawn ------------------------------------------------------------------");

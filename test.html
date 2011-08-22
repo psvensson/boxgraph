@@ -28,6 +28,10 @@
             {
                 ta.innerHTML += "connect event for '"+p1.name+"' and '"+p2.name+"'\n";     
             });
+            dojo.subscribe("boxgraph_disconnect", function(p1, p2)
+            {
+                ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";     
+            });
         })
     </script>
 </head>
