@@ -1,0 +1,23 @@
+BoxGraph is a small library to let you create an interface where your users can create conenctions between ports on boxes.
+The typical use-case could be workflow descriptions or creation and modification of connectedness in a graph model.
+
+There are three types of entities;
+
+1) Boxes. These have position, height, width and name. In the future there will be logic to create anything (images or realtime graphics, or whetever) inside a box's interior.
+2) Ports. A specific Port always belong to one specific Box
+3) Connections. A connection is created between two different Ports.
+
+At the moment BoxGraph only supports Manhattan routing of connections, but will support Beziers in the future.
+
+BoxGraph is focused on user interaction, which generate events. The events are then consumed by the using application. However, BoxGraph could also be used to display a static graph without user interaction.
+
+TODO:
+
+1. Reading and rendering of a JSON graph object.
+2. Exporting the currently edited graph in the same data format as (1).
+3. Implement events for box creation/deletion, Port creation/deletion.
+4. Implement custom box presentation
+5. Your idea here :)
+
+Cheers,
+PS
