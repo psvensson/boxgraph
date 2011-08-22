@@ -75,7 +75,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
             //this.model.y += shift.dy;
             this.model.x += shift.dx;
             this.model.y += shift.dy;
-            console.log(this.name+" model is now "+this.model.x+","+this.model.y+" shift.dx = "+shift.dx+", shift.dy = "+shift.dy);
+            //console.log(this.name+" model is now "+this.model.x+","+this.model.y+" shift.dx = "+shift.dx+", shift.dy = "+shift.dy);
             //console.dir(shift);
             for(var p in this.ports)
             {
@@ -89,7 +89,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderPorts: function()
     {
-        console.log("renderPorts called for "+this.name);
+        //console.log("renderPorts called for "+this.name);
         for(var p in this.ports)
         {
             var port = this.ports[p];

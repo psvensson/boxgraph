@@ -67,19 +67,7 @@ dojo.declare("boxgraph.boxmanager", null,
     {
         return this.boxes;   
     },
-    
-    getGoodPointFor2: function(start, destination)
-    {
       
-      // Loop through all boxes
-      
-      // See if destination collides with a box
-      
-      // If so, choose target point outside box, if our direction was;
-      // up - 30px to the left or right of box, depending on whether 
-      
-    },
-    
     // dir is direction, which also defines which axis we're interested in.
     // From the startingpoints relevant axis (defined by dir) we see if the destination point axis is not within any boxes
     // If the destination axis point (e.g. dest.x for left or right) is within a box, then we give the margin axis point before
@@ -240,13 +228,14 @@ dojo.declare("boxgraph.boxmanager", null,
         var boxsw = {x: box.x - this.intersectpadding, y: box.y + box.height + this.intersectpadding};
         var boxse = {x: box.x + box.width + this.intersectpadding, y: box.y + box.height + this.intersectpadding};
         
-        var adiffx = a.x - b.x;
-        var adiffy = a.y - b.y;
+        var adiffx = Math.abs(a.x - b.x);
+        var adiffy = Math.abs(a.y - b.y);
         
-        var xdir = adiffx > 0 ? "left" : "right";
-        var ydir = adiffy > 0 ? "up" : "down";
+        var xdir = a.x < b.x ? "right" : "left";
+        var ydir = a.y < b.y ? "down" : "up";
         
-        var dir = (adiffx > adiffy) ? ydir : xdir;
+        var dir = (adiffx > adiffy) ? xdir : ydir;
+        
         console.log("  intersectBox calculated direction "+a.x+","+a.y+" -> "+b.x+","+b.y+" is '"+dir+"' because addiffx "+adiffx+" > adiffy "+adiffy+" (adiffx > adiffy) == "+(adiffx > adiffy));
         var rv = {};
         var intup = false, intdown = false, intright = false, intleft = false;

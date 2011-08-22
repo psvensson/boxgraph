@@ -85,6 +85,7 @@ dojo.declare("boxgraph.portmanager",  null ,
                 this.surface.remove(this.line);
                 this.line = null;
             }
+            dojo.publish("boxgraph_connect", [this.firstport, this.secondport]);
             this.connectors.push(new boxgraph.connector({boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
             this.firstport = this.secondport = null;
         }               

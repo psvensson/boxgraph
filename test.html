@@ -23,11 +23,16 @@
         dojo.require("boxgraph.editor");
         dojo.ready(function()
         {
-           
+            var ta = dojo.byId("textarea");
+            dojo.subscribe("boxgraph_connect", function(p1, p2)
+            {
+                ta.innerHTML += "connect event for '"+p1.name+"' and '"+p2.name+"'\n";     
+            });
         })
     </script>
 </head>
 <body>
-    <div id="foo" dojoType="boxgraph.editor"></div>
+    <div id="foo" dojoType="boxgraph.editor" style="float:left"></div>
+    <textarea id="textarea" cols="60" rows="20" style="float:right"></textarea>
 </body>
 </html>

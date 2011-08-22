@@ -37,7 +37,7 @@ dojo.declare("boxgraph.port",  null ,
     {
         this.x = x;
         this.y = y;
-        console.log("boxgraph.port "+this.name+" render called. x = "+x+", y = "+y);
+        //console.log("boxgraph.port "+this.name+" render called. x = "+x+", y = "+y);
         var rect = {x: x, y: y, width: this.side, height: this.side};
         //console.log("creating port with parameters..");
         //console.dir(rect);
