@@ -3,6 +3,8 @@ BOXGRAPH:
 BoxGraph is a small library to let you create an interface where your users can create conenctions between ports on boxes.
 The typical use-case could be workflow descriptions or creation and modification of connectedness in a graph model.
 
+It is open source available under the BSD license. I'm a bit tired right now, so if anyone can please tell me if there's anything else I need to do thatn just state that here, pelase let me know.
+
 There are three types of entities;
 
 1) Boxes. These have position, height, width and name. In the future there will be logic to create anything (images or realtime graphics, or whetever) inside a box's interior.
