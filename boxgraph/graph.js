@@ -1,4 +1,4 @@
-dojo.provide("boxgraph.hraph");
+dojo.provide("boxgraph.graph");
 
 /*     graph.js http://github.com/bgrins/javascript-astar
 	MIT License
