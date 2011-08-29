@@ -56,7 +56,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderEntity: function()
     {
-        
+        console.log("-- renderentity called for "+this.name);
         var red_rect = this.surface.createRect(this.model).setFill("white");
         //red_rect.setFill([255, 0, 0, 0.5]);
 		red_rect.setStroke({color: "#3AAACF", width: 2, join: "round" });
@@ -89,11 +89,11 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderPorts: function()
     {
-        //console.log("renderPorts called for "+this.name);
+        console.log("renderPorts called for "+this.name);
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            //console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
+            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.dir)
@@ -127,12 +127,19 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         //console.log("boxgraph.addPort called. p is..");
         //console.dir(p);
         p.name = this.name+"_"+p.position;
+				p.id = p.id ? p.id : p.name;
         p.box = this;
         p.surface = this.surface;
         //p.surface = this.avatar;
        
         var port = new boxgraph.port(p);
-        this.ports.push(port);
+
+        this.ports[p.id] = port;
         
-    }
+    },
+
+	getPortById: function(id)
+	{
+		return this.ports[id];
+	}
 });

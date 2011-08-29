@@ -32,12 +32,14 @@
             {
                 ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";     
             });
+
+            var editor = new boxgraph.editor({ dataurl: "boxgraph/testdata.js"}, dojo.byId("foo"));
         })
     </script>
 </head>
 <body>
     <p>
-        <div id="foo" dojoType="boxgraph.editor" style="float:left"></div>
+        <div id="foo"  style="float:left;"></div>
         <textarea id="textarea" cols="40" rows="20" style="float:right"></textarea>
     </p>
     <p style="clear:both">

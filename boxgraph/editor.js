@@ -15,21 +15,68 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 		editable					: true,	// Can the user create new routes between boxes and/or delete existing routes?
 		draggable					: true, // Can the user rearrange the boxes in the editor?
 		colors						: ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
+		dataurl								: null,
        
     postCreate: function()
     {
-        this.inherited(arguments);
-        console.log("postCreate in boxgraph.editor called");
-        if(!this.surface)
-        {
-		    this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
-        }
-        //----
-        this.boxmanager = new boxgraph.boxmanager();
-        this.portmanager = new boxgraph.portmanager({surface : this.surface, boxmanager: this.boxmanager}); // Need boxmanager to get coords of boxes when routing
+			this.inherited(arguments);
+			console.log("postCreate in boxgraph.editor called. this.dataurl = '"+this.dataurl+"'");
+			if(!this.surface)
+			{
+			this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
+			}
+			//----
+			this.boxmanager = new boxgraph.boxmanager();
+			this.portmanager = new boxgraph.portmanager({surface : this.surface, boxmanager: this.boxmanager}); // Need boxmanager to get coords of boxes when routing
+			if(this.dataurl)
+			{
+				console.log("attempting to load data from url '"+this.dataurl+"'");
+				dojo.xhrGet(
+					{
+						url: this.dataurl,
+						handleAs: 'json',
+						load: dojo.hitch(this, this.loadGraph)
+					});
+			}
+			else
+			{
         this.test();
+			}
     },
-    
+
+		loadGraph: function(data)
+		{
+				console.log("loadGraph called with data '"+data+"'");
+
+				console.dir(data);
+				this.colors = data.colors;
+			console.log("-- creating boxes from file --");
+				dojo.forEach(data.boxes, dojo.hitch(this, function(box)
+				{
+					var ports = box.ports;
+					box.ports = null;
+					var newbox = new boxgraph.box({surface: this.surface, model: box});
+					this.boxmanager.addBox(newbox);
+					dojo.forEach(ports, dojo.hitch(this, function(port)
+					{
+						this.boxmanager.addPort(newbox, port);
+						console.log(" -- saving port "+port+" under id '"+port.id+"'");
+					}));
+					newbox.renderPorts();
+				}));
+			console.log("-- creating connections from file -- ");
+			
+				dojo.forEach(data.connections, dojo.hitch(this, function(connection)
+				{
+					var p1 = this.boxmanager.getPortById(connection.first);
+					var p2 = this.boxmanager.getPortById(connection.second);
+					console.log("connecting port '"+connection.first+"' with port '"+connection.second+"'");
+					this.portmanager.firstport = p1;
+					this.portmanager.highlightport = p2;
+					this.portmanager.stopConnect();
+				}));
+		},
+
     test: function()
     {
         var block1 = new boxgraph.box({surface: this.surface, model: {name:"foo", x:50, y: 100, height:100, width: 100} });

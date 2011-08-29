@@ -98,9 +98,13 @@ dojo.declare("boxgraph.portmanager",  null ,
         console.log("stopConnect called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport+", this.highlightport = "+this.highlightport);
         try
         {
-            dojo.disconnect(this.drawLineEvent);
+					if(this.drawLineEvent)
+					{
+						dojo.disconnect(this.drawLineEvent);
             dojo.disconnect(this.mouseupevent);
             this.drawLineEvent = null;
+					}
+
             
             if(this.line)
             {
