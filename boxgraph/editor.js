@@ -10,11 +10,12 @@ dojo.require("boxgraph.boxmanager");
 
 dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 {
-	templatePath			: dojo.moduleUrl("boxgraph", "editor.html"),
-    surface                 : "", // Can be provided, otherwise we create a new surface
-   
-    //06799F    216278	024E68	3AAACF	62B4CF
-    
+		templatePath			: dojo.moduleUrl("boxgraph", "editor.html"),
+    surface           : null, // Can be provided, otherwise we create a new surface
+		editable					: true,	// Can the user create new routes between boxes and/or delete existing routes?
+		draggable					: true, // Can the user rearrange the boxes in the editor?
+		colors						: ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
+       
     postCreate: function()
     {
         this.inherited(arguments);
