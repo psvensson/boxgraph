@@ -1,3 +1,57 @@
+V0.1:
+
+Changes:
+
+1. Now you can add a 'dataurl' parameters when creating the boxgraph.editor object. If iyt is present and defines a JSON file at a valid URI, the editor will try to load the file and parse it.
+The format is as follows;
+
+{
+    "colors": ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
+    "boxes":
+    [
+        {
+            "id": 1,
+            "name":"foo",
+            "x":50,
+            "y": 210,
+            "height":100,
+            "width": 150,
+            "ports":
+            [
+                { "id": 100, "dir": "right", "position": 1},
+                { "id": 101, "dir": "up", "position": 3},
+				{ "id": 105, "dir": "left", "position": 2}
+            ]
+        },
+        {
+            "id": 2,
+            "name":"bar",
+            "x":250,
+            "y": 50,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 102, "dir": "left", "position": 2},
+                { "id": 103, "dir": "right", "position": 1},
+				{ "id": 104, "dir": "down", "position": 1}
+            ]
+        }
+    ],
+    "connections":
+    [
+        {"first": 101, "second": 102},
+        {"first": 103, "second": 100}
+    ]
+}
+
+The old test file is now called 'test_editgraph.html- The new test file which tests loading from JSON is called 'test_loadgraph.html'
+
+TODO:
+
+1. The colors property is not yet used, but will make it easy to have your own color schemes.
+2. It will also be possible to make the editor 'locked' so that boxes can't move around, also to disable adding or removing connections.
+
 BOXGRAPH:
 
 BoxGraph is a small library to let you create an interface where your users can create conenctions between ports on boxes.
