@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Boxgraph Test Page</title>
+    
+    <script type="text/javascript">
+       djConfig =
+       {
+
+            isDebug: true,
+            debugAtAllCosts: true,
+            baseUrl: "./",
+            parseOnLoad: true,
+            modulePaths: {'boxgraph': './boxgraph'}
+       }
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.5.0/dojo/dojo.xd.js.uncompressed.js"></script>
+    
+    <!-- <script src="http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dojo/dojo.js"></script> -->
+    <script type="text/javascript">
+        
+        dojo.require("boxgraph.editor");
+        dojo.ready(function()
+        {
+            var ta = dojo.byId("textarea");
+            dojo.subscribe("boxgraph_connect", function(p1, p2)
+            {
+                ta.innerHTML += "connect event for '"+p1.name+"' and '"+p2.name+"'\n";     
+            });
+            dojo.subscribe("boxgraph_disconnect", function(p1, p2)
+            {
+                ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";     
+            });
+
+            var editor = new boxgraph.editor({ dataurl: "boxgraph/testdata.js"}, dojo.byId("foo"));
+        })
+    </script>
+</head>
+<body>
+    <p>
+        <div id="foo"  style="float:left;"></div>
+        <textarea id="textarea" cols="40" rows="20" style="float:right"></textarea>
+    </p>
+    <p style="clear:both">
+        BoxGraph on GitHub: <a href="https://github.com/psvensson/boxgraph">https://github.com/psvensson/boxgraph</a>
+    </p>
+</body>
+</html>
