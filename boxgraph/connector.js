@@ -21,8 +21,8 @@ dojo.declare("boxgraph.connector", null, {
 		constructor: function(args)
 		{
 			this.inherited(arguments);
-			//console.log("boxgraph.connector constructor called. args are...");
-			//console.dir(args);
+			console.log("boxgraph.connector constructor called. args are...");
+			console.dir(args);
 			if (!args.firstport || !args.secondport)
 			{
 				//throw "Y U NO BOTH FIRST AND SECOND PORTS!!!?";
@@ -32,12 +32,13 @@ dojo.declare("boxgraph.connector", null, {
 			this.secondport = args.secondport;
 			this.surface = args.surface;
 			this.boxmanager = args.boxmanager;
+			this.routing = args.routing || this.routing;
 
 			//this.manhattan = new boxgraph.routing.manhattan({boxmanager: this.boxmanager});
-			this.manhattan = new boxgraph.routing.manhattan2({boxmanager: this.boxmanager});
-			this.straight = new boxgraph.routing.straight({boxmanager: this.boxmanager});
-			this.curved = new boxgraph.routing.curved({boxmanager: this.boxmanager});
-
+			this.manhattan 	= new boxgraph.routing.manhattan2({boxmanager: this.boxmanager});
+			this.straight	 	= new boxgraph.routing.straight({boxmanager: this.boxmanager});
+			this.curved 		= new boxgraph.routing.curved({boxmanager: this.boxmanager});
+			console.log("drawing line..");
 			this.drawLine();
 
 			dojo.subscribe("boxgraph_redraw", dojo.hitch(this, function()
@@ -59,10 +60,10 @@ dojo.declare("boxgraph.connector", null, {
 
 		drawLine: function()
 		{
-			//console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+			console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
 
 			var ll = this.getRoute();
-			//console.log("got route of type '" + this.routing + "' ;");
+			console.log("got route of type '" + this.routing + "' ;");
 			//console.dir(ll);
 			//this.line = ll.x1 ? this.surface.createLine(ll) : this.surface.createPolyline(ll);
 			// Debug failsafe

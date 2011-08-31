@@ -16,7 +16,7 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 		draggable					: true, // Can the user rearrange the boxes in the editor?
 		colors						: ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
 		dataurl						: null,
-		routing						: "curved", // "straight", "manhattan", "curved";
+		routing						: "manhattan", // "straight", "manhattan", "curved";
        
     postCreate: function()
     {
@@ -24,11 +24,13 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 			console.log("postCreate in boxgraph.editor called. this.dataurl = '"+this.dataurl+"'");
 			if(!this.surface)
 			{
-			this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
+				this.surface = dojox.gfx.createSurface(this.editordiv, 500, 500);
 			}
+			this.routing = arguments.routing || this.routing;
+			console.log("editor: this.routing = "+this.routing);
 			//----
 			this.boxmanager = new boxgraph.boxmanager();
-			this.portmanager = new boxgraph.portmanager({surface : this.surface, boxmanager: this.boxmanager}); // Need boxmanager to get coords of boxes when routing
+			this.portmanager = new boxgraph.portmanager({surface : this.surface, boxmanager: this.boxmanager, routing: this.routing}); // Need boxmanager to get coords of boxes when routing
 			if(this.dataurl)
 			{
 				console.log("attempting to load data from url '"+this.dataurl+"'");

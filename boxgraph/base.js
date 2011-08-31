@@ -9,7 +9,7 @@ dojo.declare("boxgraph.base", null,
     
     constructor: function(args)
     {
-        console.log("boxgraph.base constructor called..");
+        //console.log("boxgraph.base constructor called..");
         try
         {
         this.model = args.model;

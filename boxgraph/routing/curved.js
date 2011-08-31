@@ -2,12 +2,33 @@ dojo.provide("boxgraph.routing.curved");
 
 dojo.require("boxgraph.routing.manhattan2");
 
-dojo.declare("boxgraph.routing.curved", null,
+dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 {
+
+	boxmanager:     "",
+    sanitycheck:    8,
+	
+	 constructor: function(args)
+    {
+        this.boxmanager = args.boxmanager;
+    },
 
 		drawLine: function(ll, surface)
 		{
-			return surface.createPolyline(ll);
+			//return surface.createPolyline(ll);
+			var path = surface.createPath();
+			var first = ll[0];
+			var second = ll[0];
+			path.moveTo(first.x, first.y);
+			path.qCurveTo(second.x, second.y, second.x+20, second.y+20);
+			for(var i = 2; i < ll.length; i++)
+			{
+				var p = ll[i];
+				path.qSmoothCurveTo(p.x, p.y);
+			}
+
+
+			return path;
 		},
 
 		drawShadowLine: function(ll, surface)
@@ -17,7 +38,7 @@ dojo.declare("boxgraph.routing.curved", null,
 
 	getRouting: function(fp, secondport)
     {
-        console.log("--- getRouting called.");
+        console.log("--- Curved getRouting called.");
         var sp = {x: secondport.x+5 , y: secondport.y+5, dir: secondport.dir};
         //sp = this.boxmanager.getPaddingFor(sp);
         console.dir({fp: fp, sp: sp});

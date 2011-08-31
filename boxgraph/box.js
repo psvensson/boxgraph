@@ -14,10 +14,10 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     constructor: function(args)
     {
-        console.log("boxgraph.box constructor");
+        //console.log("boxgraph.box constructor");
         this.inherited(arguments);
         this.ports = [];
-        console.log("boxgraph.box constructor. this.model is "+this.model);
+        //console.log("boxgraph.box constructor. this.model is "+this.model);
         this.name = this.model.name;
         this.avatar = this.surface.createGroup();
         this.render();
@@ -50,13 +50,13 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         this.renderPorts();  
         var nx = this.model.x + this.model.width / 2 - 4 * this.name.length;
         var ny = this.model.y + this.model.height / 2;
-        console.log("++ drawing name '"+this.name+"' for box at "+nx+", "+ny);
+        //console.log("++ drawing name '"+this.name+"' for box at "+nx+", "+ny);
         this.avatar.createText({text: this.name, x: nx, y: ny}).setFill("black");
     },
     
     renderEntity: function()
     {
-        console.log("-- renderentity called for "+this.name);
+        //console.log("-- renderentity called for "+this.name);
         var red_rect = this.surface.createRect(this.model).setFill("white");
         //red_rect.setFill([255, 0, 0, 0.5]);
 		red_rect.setStroke({color: "#3AAACF", width: 2, join: "round" });
@@ -89,11 +89,11 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderPorts: function()
     {
-        console.log("renderPorts called for "+this.name);
+        //console.log("renderPorts called for "+this.name);
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
+            //console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.dir)

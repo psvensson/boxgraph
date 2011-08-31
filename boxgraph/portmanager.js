@@ -18,7 +18,7 @@ dojo.declare("boxgraph.portmanager",  null ,
         this.surface = args.surface;
         this.boxmanager = args.boxmanager;
         
-        console.log("boxgraph.portmanager constructor.");
+        console.log("boxgraph.portmanager constructor. this.boxmanager = "+this.boxmanager);
         
         dojo.subscribe("port_highlight", dojo.hitch(this, function(arg)
         {                        
