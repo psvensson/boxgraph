@@ -110,7 +110,7 @@ dojo.declare("boxgraph.boxmanager", null, {
 
 			target[otheraxis] = dest[otheraxis];
 			target[axis] = start[axis];
-			console.log("++++++++++++++++++++++++ getGoodPointFor -- dir = " + dir + ",  start[" + axis + "] = " + start[axis] + ", start[" + otheraxis + "] = " + start[otheraxis] + ", target[" + axis + "] = " + target[axis] + ", target[" + otheraxis + "] = " + target[otheraxis]);
+			//console.log("++++++++++++++++++++++++ getGoodPointFor -- dir = " + dir + ",  start[" + axis + "] = " + start[axis] + ", start[" + otheraxis + "] = " + start[otheraxis] + ", target[" + axis + "] = " + target[axis] + ", target[" + otheraxis + "] = " + target[otheraxis]);
 			// Now we have a target point
 
 			// We want to get from start[axis] to target[axis], e.g. start.x to target.x
@@ -127,10 +127,10 @@ dojo.declare("boxgraph.boxmanager", null, {
 				var collidedwith = start.collidedwith.model;
 				//console.log("last point was a collision with ");
 				//console.dir(collidedwith);
-				console.log("collission.dir = " + start.dir);
+				//console.log("collission.dir = " + start.dir);
 				var midx = collidedwith.x + collidedwith.width / 2;
 				var midy = collidedwith.y + collidedwith.height / 2;
-				console.log("midx = " + midx + ", midy = " + midy);
+				//console.log("midx = " + midx + ", midy = " + midy);
 				switch (start.dir)
 				{
 				case "up":
@@ -171,8 +171,8 @@ dojo.declare("boxgraph.boxmanager", null, {
 				// Sort all collisions so that we only cater for the nearest one!
 				if (collissions.length > 0)
 				{
-					console.log("collissions are..");
-					console.dir(collissions);
+					//console.log("collissions are..");
+					//console.dir(collissions);
 					collissions.sort(function(a, b)
 					{
 						var rv = 0;
@@ -189,14 +189,14 @@ dojo.declare("boxgraph.boxmanager", null, {
 						return rv;
 					});
 					var nearest = collissions.pop();
-					console.log(" --- chose box '" + nearest.box.name + "' as closest collission");
+					//console.log(" --- chose box '" + nearest.box.name + "' as closest collission");
 					rv = nearest.collision;
 					rv.collidedwith = nearest.box;
 				}
 			}
 			//rv.dir = start.dir;
 			rv.dir = start.dir;
-			console.log("+++ getGoodPointFor returning x: " + rv.x + ", y: " + rv.y + ", dir: " + rv.dir);
+			//console.log("+++ getGoodPointFor returning x: " + rv.x + ", y: " + rv.y + ", dir: " + rv.dir);
 			return rv;
 		},
 

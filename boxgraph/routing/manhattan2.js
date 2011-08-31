@@ -9,7 +9,17 @@ dojo.declare("boxgraph.routing.manhattan2", null,
     {
         this.boxmanager = args.boxmanager;    
     },
-    
+
+		drawLine: function(ll, surface)
+		{
+			return surface.createPolyline(ll);
+		},
+
+		drawShadowLine: function(ll, surface)
+		{
+			return surface.createPolyline(ll);
+		},
+
     // fp - firstport - beginning, sp - secondport - end
     getRouting: function(fp, secondport)
     {        
@@ -32,7 +42,7 @@ dojo.declare("boxgraph.routing.manhattan2", null,
             }
             //var dir = this.getDirection(nextpoint, sp); // If sp.x > fp.x and fp is located 'up', then direction is left
             //nextpoint.dir = dir;
-            console.log("Calling getNetGoodPoint for...");
+            //console.log("Calling getNextGoodPoint for...");
             console.dir({fp: nextpoint, sp: sp});
             nextpoint = this.getNextPoint(nextpoint, sp);
             

@@ -15,7 +15,8 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 		editable					: true,	// Can the user create new routes between boxes and/or delete existing routes?
 		draggable					: true, // Can the user rearrange the boxes in the editor?
 		colors						: ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
-		dataurl								: null,
+		dataurl						: null,
+		routing						: "curved", // "straight", "manhattan", "curved";
        
     postCreate: function()
     {

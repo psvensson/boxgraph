@@ -23,37 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="test_loadgraph.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_loadgraph.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="41" selection-start="1391" selection-end="1391" vertical-scroll-proportion="-25.625">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_editgraph.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test_editgraph.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_editgraph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="46" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.6371359">
+            <state line="35" column="46" selection-start="1248" selection-end="1248" vertical-scroll-proportion="-21.833334">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README">
+      <file leaf-file-name="test_beziergraph.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_beziergraph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="0" selection-start="1330" selection-end="1330" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testdata.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boxgraph/testdata.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="1" selection-start="0" selection-end="957" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -62,7 +44,7 @@
       <file leaf-file-name="editor.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/editor.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,7 +53,25 @@
       <file leaf-file-name="editor.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="6" selection-start="2181" selection-end="2181" vertical-scroll-proportion="0.0">
+            <state line="18" column="31" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="connector.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/boxgraph/connector.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.6946108">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manhattan2.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/boxgraph/routing/manhattan2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="14" selection-start="1550" selection-end="1550" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -80,7 +80,7 @@
       <file leaf-file-name="boxmanager.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/boxmanager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="31" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0">
+            <state line="198" column="8" selection-start="6108" selection-end="6108" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -98,7 +98,16 @@
       <file leaf-file-name="portmanager.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/portmanager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="38" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0">
+            <state line="112" column="33" selection-start="4090" selection-end="4090" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="port.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/boxgraph/port.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -123,14 +132,16 @@
         <option value="$PROJECT_DIR$/drawutil/base.js" />
         <option value="$PROJECT_DIR$/drawutil/test/testBezier.js" />
         <option value="$PROJECT_DIR$/boxgraph/testdata.json" />
-        <option value="$PROJECT_DIR$/boxgraph/portmanager.js" />
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/boxgraph/box.js" />
-        <option value="$PROJECT_DIR$/boxgraph/boxmanager.js" />
-        <option value="$PROJECT_DIR$/boxgraph/editor.js" />
         <option value="$PROJECT_DIR$/boxgraph/testdata.js" />
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/test_editgraph.html" />
+        <option value="$PROJECT_DIR$/boxgraph/portmanager.js" />
+        <option value="$PROJECT_DIR$/boxgraph/editor.js" />
+        <option value="$PROJECT_DIR$/boxgraph/routing/manhattan2.js" />
+        <option value="$PROJECT_DIR$/boxgraph/boxmanager.js" />
+        <option value="$PROJECT_DIR$/boxgraph/connector.js" />
       </list>
     </option>
   </component>
@@ -186,6 +197,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawutil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxgraph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxgraph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -197,8 +226,8 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="options.lastSelected" value="settings.github" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -213,6 +242,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/boxgraph" />
     </key>
   </component>
@@ -260,12 +290,12 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2522911" sideWeight="0.49543378" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25552562" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2522911" sideWeight="0.49543378" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25552562" sideWeight="0.49086758" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -321,65 +351,87 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/boxgraph/portmanager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="38" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/editor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/box.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="26" selection-start="4707" selection-end="4707" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/boxmanager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="31" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/editor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="6" selection-start="2181" selection-end="2181" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_loadgraph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="41" selection-start="1391" selection-end="1391" vertical-scroll-proportion="-25.625">
+        <state line="41" column="41" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/boxgraph/testdata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="1" selection-start="0" selection-end="957" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="38" column="1" selection-start="0" selection-end="957" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/editor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/box.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="142" column="26" selection-start="4707" selection-end="4707" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1330" selection-end="1330" vertical-scroll-proportion="0.0">
+        <state line="22" column="58" selection-start="675" selection-end="675" vertical-scroll-proportion="0.39520958">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_editgraph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="46" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.6371359">
+        <state line="35" column="46" selection-start="1248" selection-end="1248" vertical-scroll-proportion="-21.833334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_beziergraph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="31" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/portmanager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="33" selection-start="4090" selection-end="4090" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/port.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/routing/manhattan2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="14" selection-start="1550" selection-end="1550" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/boxmanager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="8" selection-start="6108" selection-end="6108" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/connector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.6946108">
           <folding />
         </state>
       </provider>
