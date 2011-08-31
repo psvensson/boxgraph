@@ -41,15 +41,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editor.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boxgraph/editor.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="editor.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/editor.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,10 +50,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connector.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="connector.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/connector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.6946108">
+            <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,7 +62,16 @@
       <file leaf-file-name="manhattan2.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/routing/manhattan2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="14" selection-start="1550" selection-end="1550" vertical-scroll-proportion="0.0">
+            <state line="48" column="24" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="curved.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/boxgraph/routing/curved.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="3" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.93413174">
               <folding />
             </state>
           </provider>
@@ -142,6 +142,7 @@
         <option value="$PROJECT_DIR$/boxgraph/routing/manhattan2.js" />
         <option value="$PROJECT_DIR$/boxgraph/boxmanager.js" />
         <option value="$PROJECT_DIR$/boxgraph/connector.js" />
+        <option value="$PROJECT_DIR$/boxgraph/routing/curved.js" />
       </list>
     </option>
   </component>
@@ -415,13 +416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/routing/manhattan2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="14" selection-start="1550" selection-end="1550" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boxgraph/boxmanager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="198" column="8" selection-start="6108" selection-end="6108" vertical-scroll-proportion="0.0">
@@ -431,7 +425,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/boxgraph/connector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.6946108">
+        <state line="112" column="39" selection-start="3820" selection-end="3820" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/routing/manhattan2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="24" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxgraph/routing/curved.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="3" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.93413174">
           <folding />
         </state>
       </provider>
