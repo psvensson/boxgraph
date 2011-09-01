@@ -5,7 +5,7 @@ dojo.require("boxgraph.routing.manhattan2");
 dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 {
 
-	boxmanager:     "",
+		boxmanager:     "",
     sanitycheck:    8,
 	
 	 constructor: function(args)
@@ -15,16 +15,46 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 
 		drawLine: function(ll, surface)
 		{
+			var q = 5;
 			//return surface.createPolyline(ll);
 			var path = surface.createPath();
 			var first = ll[0];
-			var second = ll[0];
+			var second = ll[1];
+			var third = ll[2];
 			path.moveTo(first.x, first.y);
-			path.qCurveTo(second.x, second.y, second.x+20, second.y+20);
-			for(var i = 2; i < ll.length; i++)
+			//var mx = (second.x + first.x / 2) - second.x;
+			//var my = (second.y + first.y / 2) - second.x;
+			//path.curveTo(mx+q, my-q, mx-q, my+q, second.x, second.y);
+			//var oldx = first.x;
+			//var oldy = first.y;
+			//path.qCurveTo(second.x, second.y, third.x, third.y);
+			for(var i = 1; i < ll.length; i+=2)
 			{
+				var c = ll[i-1];
 				var p = ll[i];
-				path.qSmoothCurveTo(p.x, p.y);
+				var s = ll[i+1];
+				console.log("step "+i+" -> c="+c+", p="+p+", s="+s);
+				//var midx = p.x+15;
+				//var midy = p.y;
+				//mx = (p.x + c.x / 2) ;
+				//my = (p.y + c.y / 2) ;
+				//path.qSmoothCurveTo(p.x, p.y);
+				if(!s)
+				{
+					path.qCurveTo(c.x, c.y, p.x, p.y);
+				}
+				else
+				{
+					//path.qCurveTo(p.x, p.y, s.x, s.y);
+					path.qSmoothCurveTo(p.x, p.y);
+				}
+
+				//path.curveTo(mx+q, my-q, mx-q, my+q, p.x, p.y);
+				//oldx = p.x;
+				//oldy = p.y;
+				//path.qSmoothCurveTo(p.x, p.y);
+
+
 			}
 
 
@@ -34,6 +64,7 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 		drawShadowLine: function(ll, surface)
 		{
 			return surface.createPolyline(ll);
+			//return this.drawLine(ll, surface);
 		},
 
 	getRouting: function(fp, secondport)
