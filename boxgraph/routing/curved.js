@@ -28,12 +28,12 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			//var oldx = first.x;
 			//var oldy = first.y;
 			//path.qCurveTo(second.x, second.y, third.x, third.y);
-			for(var i = 1; i < ll.length; i+=2)
+			for(var i = 1; i < ll.length; i+=1)
 			{
-				var c = ll[i-1];
+				//var c = ll[i-1];
 				var p = ll[i];
 				var s = ll[i+1];
-				console.log("step "+i+" -> c="+c+", p="+p+", s="+s);
+				//console.log("step "+i+" -> c="+c+", p="+p+", s="+s);
 				//var midx = p.x+15;
 				//var midy = p.y;
 				//mx = (p.x + c.x / 2) ;
@@ -41,12 +41,13 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 				//path.qSmoothCurveTo(p.x, p.y);
 				if(!s)
 				{
-					path.qCurveTo(c.x, c.y, p.x, p.y);
+					path.qCurveTo(p.x-20, p.y-10, p.x, p.y);
 				}
 				else
 				{
-					//path.qCurveTo(p.x, p.y, s.x, s.y);
-					path.qSmoothCurveTo(p.x, p.y);
+					path.qCurveTo(p.x+20, p.y+20, s.x, s.y);
+					//path.qSmoothCurveTo(p.x, p.y);
+					//path.curveTo(c.x+20, c.y+20, p.x-20, p.y-20, s.x, s.y);
 				}
 
 				//path.curveTo(mx+q, my-q, mx-q, my+q, p.x, p.y);
