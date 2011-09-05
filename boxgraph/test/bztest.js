@@ -67,7 +67,7 @@ dojo.declare("boxgraph.test.bztest", [	dijit._Widget, dijit._Templated ],
 		path.lineTo(points[4]);
 
 		bpath.moveTo(points[0]);
-		bpath.qCurveTo(p1.x+25, p1.y-50, p2);
+		bpath.qCurveTo(p1.x+0, p1.y-50, p2);
 		//bpath.qCurveTo(p1.x+0, p1.y+50, p2);
 		bpath.qCurveTo(p3.x-0, p3.y+50, p4);
 

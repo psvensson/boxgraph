@@ -32,10 +32,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bztest.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="bztest.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/boxgraph/test/bztest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="38" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.8938679">
+            <state line="61" column="119" selection-start="1319" selection-end="1434" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -68,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="curved.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="curved.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/boxgraph/routing/curved.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="50" selection-start="1126" selection-end="1166" vertical-scroll-proportion="0.0">
+            <state line="55" column="84" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.657485">
               <folding />
             </state>
           </provider>
@@ -130,10 +130,10 @@
         <option value="$PROJECT_DIR$/boxgraph/base.js" />
         <option value="$PROJECT_DIR$/boxgraph/portmanager.js" />
         <option value="$PROJECT_DIR$/boxgraph/connector.js" />
-        <option value="$PROJECT_DIR$/boxgraph/routing/curved.js" />
         <option value="$PROJECT_DIR$/boxgraph/test/bztest.html" />
         <option value="$PROJECT_DIR$/test_beziers.html" />
         <option value="$PROJECT_DIR$/boxgraph/test/bztest.js" />
+        <option value="$PROJECT_DIR$/boxgraph/routing/curved.js" />
       </list>
     </option>
   </component>
@@ -441,16 +441,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/routing/curved.js">
+    <entry file="file://$PROJECT_DIR$/boxgraph/test/bztest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="50" selection-start="1126" selection-end="1166" vertical-scroll-proportion="0.0">
+        <state line="61" column="119" selection-start="1319" selection-end="1434" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boxgraph/test/bztest.js">
+    <entry file="file://$PROJECT_DIR$/boxgraph/routing/curved.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="38" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.8938679">
+        <state line="55" column="84" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.657485">
           <folding />
         </state>
       </provider>
