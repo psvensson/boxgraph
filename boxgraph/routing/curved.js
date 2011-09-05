@@ -60,9 +60,9 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 					path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
 
 					this.circles.push(surface.createCircle({cx: c.x, cy: c.y, r:3}).setStroke({color: [255, 0, 0, 1.0], width: 1 }));
-					this.addText(surface, c.x+5, c.y+5, num++);
+					//this.addText(surface, c.x+5, c.y+5, num++);
 					this.circles.push(surface.createCircle({cx: p.x, cy: p.y, r:3}).setStroke({color: [0, 155, 155, 1.0], width: 1 }));
-					this.addText(surface, p.x+5, p.y+5, num++);
+					//this.addText(surface, p.x+5, p.y+5, num++);
 					q = -q;
 					stroke = stroke == "Solid" ? "ShortDash" : "Solid";
 				}
@@ -105,7 +105,7 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 					newp.x = oldp.x;
 				}
 				rv.push(newp);
-				//dir = -dir;
+				dir = -dir;
 			}
 			rv.push(p);
 			return rv;
