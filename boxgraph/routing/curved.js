@@ -43,7 +43,8 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			path.lineTo(second.x, second.y);
 			
 			//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
-			this.addText(surface, first.x+10, first.y+10, num++);
+			//this.addText(surface, first.x+10, first.y+10, num++);
+			
 			var stroke = "Solid"
 
 			for(var i = 2; i < ll.length; i+=2)
