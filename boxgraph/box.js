@@ -21,6 +21,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         this.name = this.model.name;
         this.avatar = this.surface.createGroup();
         this.render();
+			this.portcount = 0;
     },
     
     flush: function()
@@ -89,11 +90,12 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderPorts: function()
     {
-        //console.log("renderPorts called for "+this.name);
+        console.log("renderPorts called for "+this.name);
+				console.dir(this.ports);
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            //console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
+            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.dir)
@@ -116,7 +118,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
                 break;
             }            
             port.remove();
-            port.render(this.model.x + x, this.model.y + y);
+            port.render(parseInt(this.model.x + x, 10), parseInt(this.model.y + y, 10));
             //this.avatar.add(port);
         }
         this.avatar.moveToBack(this.rect);
@@ -126,14 +128,14 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     {        
         //console.log("boxgraph.addPort called. p is..");
         //console.dir(p);
-        p.name = this.name+"_"+p.position;
+        p.name = this.name+"_"+p.position+"_"+this.portcount++;
 				p.id = p.id ? p.id : p.name;
         p.box = this;
         p.surface = this.surface;
         //p.surface = this.avatar;
        
         var port = new boxgraph.port(p);
-
+				console.log("Adding port '"+p.id+" to box '"+this.name+"'");
         this.ports[p.id] = port;
         
     },

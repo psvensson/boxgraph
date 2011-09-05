@@ -12,12 +12,12 @@ dojo.declare("boxgraph.routing.manhattan2", null,
 
 		drawLine: function(ll, surface)
 		{
-			return surface.createPolyline(ll);
+			return surface.createPolyline(ll).setStroke({style: "Solid"});
 		},
 
 		drawShadowLine: function(ll, surface)
 		{
-			return surface.createPolyline(ll);
+			return surface.createPolyline(ll).setStroke({style: "Solid"});
 		},
 
     // fp - firstport - beginning, sp - secondport - end
