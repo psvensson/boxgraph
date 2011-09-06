@@ -93,17 +93,18 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 				p = ll[i];
 				rv.push(oldp);
 				var newp = {};
+				
 				if(oldp.x == p.x)
 				{
-					q = (oldp.y - p.y)/6 * dir;
+					q = Math.abs((oldp.y - p.y)/6 * dir);
 					newp.x = parseInt(oldp.x - q, 10);
-					newp.y = oldp.y;
+					newp.y = oldp.y-q;
 				}
 				else
 				{
 					q = (oldp.x - p.x)/2 * dir;
 					newp.y = parseInt(oldp.y - q, 10);
-					newp.x = oldp.x;
+					newp.x = oldp.x-q;
 				}
 				rv.push(newp);
 				dir = -dir;
