@@ -60,7 +60,7 @@ dojo.declare("boxgraph.connector", null, {
 
 		drawLine: function()
 		{
-			console.log("boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
+			console.log("+++ boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
 
 			var ll = this.getRoute();
 			console.log("got route of type '" + this.routing + "' ;");
@@ -72,13 +72,13 @@ dojo.declare("boxgraph.connector", null, {
 				delete l.collidedwith;
 			});
 
-			this.line = this.getType().drawLine(ll, this.surface);
+			this.line = this.getType().drawLine(ll, this.surface, this.firstport, this.secondport);
 			console.log("connector line drawn");
 			// create a larger highlight to show on mouseover
 
 			try
 			{
-				this.shadowline = this.getType().drawShadowLine(ll, this.surface);
+				this.shadowline = this.getType().drawShadowLine(ll, this.surface, this.firstport, this.secondport);
 				console.log("connector shadow line drawn");
 				this.shadowline.setStroke({color: [0, 0, 0, 0], width: 10 });
 				var snode = this.shadowline.getNode();

@@ -13,8 +13,9 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
         this.boxmanager = args.boxmanager;
     },
 
-		drawLine: function(llorig, surface)
+		drawLine: function(llorig, surface, fp, sp)
 		{
+			console.log("drawLine, fp="+fp+", sp="+sp);
 			if(this.circles)
 			{
 				dojo.forEach(this.circles, function(circle)
@@ -28,7 +29,7 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			}
 			console.log("curved orig line is..");
 			console.dir(llorig);
-			var ll = this.expandLine(llorig);
+			var ll = this.expandLine(llorig, fp, sp);
 			console.log("curved expanded line is..");
 			console.dir(ll);
 			var q =	25;
@@ -40,10 +41,11 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			var num = 0;
 
 			path.moveTo(first.x, first.y);
+			this.addText(surface, first.x+10, first.y+10, num++);
 			path.lineTo(second.x, second.y);
-			
+			this.addText(surface, second.x+10, second.y+10, num++);
 			//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
-			//this.addText(surface, first.x+10, first.y+10, num++);
+
 			
 			var stroke = "Solid"
 
@@ -52,24 +54,22 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 				var c = ll[i];
 				var p = ll[i+1];
 				//var s = ll[i+1];
-				var qx = 0;
-				var qy = 0;
+
 				if(p)
 				{
 					//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y).setStroke({style: stroke, color: "black"});
-					
-					path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
+					path.qCurveTo(c.x, c.y, p.x, p.y);
 
-					this.circles.push(surface.createCircle({cx: c.x, cy: c.y, r:3}).setStroke({color: [255, 0, 0, 1.0], width: 1 }));
-					//this.addText(surface, c.x+5, c.y+5, num++);
-					this.circles.push(surface.createCircle({cx: p.x, cy: p.y, r:3}).setStroke({color: [0, 155, 155, 1.0], width: 1 }));
-					//this.addText(surface, p.x+5, p.y+5, num++);
+					this.circles.push(surface.createCircle({cx: c.x, cy: c.y, r:3}).setStroke({color: [0, 255, 0, 1.0], width: 1 }));
+					this.addText(surface, c.x+5, c.y+5, num++);
+					this.circles.push(surface.createCircle({cx: p.x, cy: p.y, r:3}).setStroke({color: [0, 55, 255, 1.0], width: 1 }));
+					this.addText(surface, p.x+5, p.y+5, num++);
 					q = -q;
 					stroke = stroke == "Solid" ? "ShortDash" : "Solid";
 				}
 				else
 				{
-					path.qCurveTo(c.x+qx, c.y+qy, c.x, c.y);
+					path.qCurveTo(c.x, c.y, sp.x, sp.y); // Just go to second point, we're nearly there anyway
 				}
 			}
 			return path;
@@ -81,35 +81,42 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 		},
 
 		// Add an extra point between each point so the bézier can 'curve' between the new extra points using the old points as offsets
-		expandLine: function(ll)
+		expandLine: function(ll, fp, sp)
 		{
 			var rv = [];
-			var dir = 1;
+			var uddir = (fp.dir == "up" 		|| fp.dir == "down") ? 1 : -1;
+			var lrdir = (fp.dir == "right" 	|| fp.dir == "left") ? 1 : -1;
 			var p = null;
+			// First push the first point
 			rv.push(ll[0]);
-			for(var i = 2; i < ll.length; i++)
+
+			for(var i = 1; i < ll.length; i++)
 			{
 				var oldp = ll[i-1];
 				p = ll[i];
-				rv.push(oldp);
+				//rv.push(oldp);  // Add old point
 				var newp = {};
-				
+
 				if(oldp.x == p.x)
 				{
-					q = Math.abs((oldp.y - p.y)/6 * dir);
-					newp.x = parseInt(oldp.x - q, 10);
-					newp.y = oldp.y-q;
+					q = parseInt(Math.abs((oldp.y - p.y) / 2) * uddir, 10);
+					newp.x = oldp.x;
+					newp.y = oldp.y + q;
+					uddir = -uddir;
 				}
 				else
 				{
-					q = (oldp.x - p.x)/2 * dir;
-					newp.y = parseInt(oldp.y - q, 10);
-					newp.x = oldp.x-q;
+					q = parseInt(Math.abs((oldp.x - p.x) / 2)  * lrdir, 10);
+					newp.y = oldp.y ;
+					newp.x = oldp.x + q;
+					lrdir = -lrdir;
 				}
-				rv.push(newp);
-				dir = -dir;
+
+				rv.push(newp); // Add new point halfway between last point and old point
+				rv.push(p); // USe old next point as control point (bézier attractor)
+
 			}
-			rv.push(p);
+			//rv.push(p);
 			return rv;
 		},
 
