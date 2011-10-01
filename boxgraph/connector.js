@@ -63,14 +63,17 @@ dojo.declare("boxgraph.connector", null, {
 			console.log("+++ boxgraph.connector.drawLine called. this.firstport = "+this.firstport+", this.secondport = "+this.secondport);
 
 			var ll = this.getRoute();
-			console.log("got route of type '" + this.routing + "' ;");
-			//console.dir(ll);
+			
 			//this.line = ll.x1 ? this.surface.createLine(ll) : this.surface.createPolyline(ll);
 			// Debug failsafe
 			dojo.forEach(ll, function(l)
 			{
 				delete l.collidedwith;
+                delete l.dir;
 			});
+            
+            console.log("got route of type '" + this.routing + "' ;");
+    		console.dir(ll);
 
 			this.line = this.getType().drawLine(ll, this.surface, this.firstport, this.secondport);
 			console.log("connector line drawn");

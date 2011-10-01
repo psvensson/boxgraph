@@ -45,7 +45,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     render: function()
     {
-        console.log("boxgraph.render called for box '"+this.name+"'. this.surface = "+this.surface);
+        //console.log("boxgraph.render called for box '"+this.name+"'. this.surface = "+this.surface);
         //this.flush();
         this.renderEntity();
         this.renderPorts();  
@@ -90,12 +90,12 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
     
     renderPorts: function()
     {
-        console.log("renderPorts called for "+this.name);
-				console.dir(this.ports);
+        //console.log("renderPorts called for "+this.name);
+		//console.dir(this.ports);
         for(var p in this.ports)
         {
             var port = this.ports[p];
-            console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
+            //console.log("boxgraph.box renderPorts called for box '"+this.name+"', rendering port "+p+", dir = '"+port.dir+"', position = "+port.position);
             var x,y;
             var jiff = 5 * port.position;
             switch(port.dir)
@@ -135,7 +135,7 @@ dojo.declare("boxgraph.box",  boxgraph.base ,
         //p.surface = this.avatar;
        
         var port = new boxgraph.port(p);
-				console.log("Adding port '"+p.id+" to box '"+this.name+"'");
+		//console.log("Adding port '"+p.id+" to box '"+this.name+"'");
         this.ports[p.id] = port;
         
     },

@@ -32,29 +32,34 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			var ll = this.expandLine(llorig, fp, sp);
 			console.log("curved expanded line is..");
 			console.dir(ll);
+            try
+            {
 			var q =	25;
 			//return surface.createPolyline(ll);
+            
 			var path = surface.createPath();
+            
 			var first = ll[0];
 			var second = ll[1];
 			var third = ll[2];
 			var num = 0;
-
+            
 			path.moveTo(first.x, first.y);
+            
 			this.addText(surface, first.x+10, first.y+10, num++);
+            
 			path.lineTo(second.x, second.y);
+            
 			this.addText(surface, second.x+10, second.y+10, num++);
 			//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
-
-			
 			var stroke = "Solid"
-
+            //console.log("starting to compute new points..");
 			for(var i = 2; i < ll.length; i+=2)
 			{
 				var c = ll[i];
 				var p = ll[i+1];
 				//var s = ll[i+1];
-
+                //console.log("  drawing from point "+c);
 				if(p)
 				{
 					//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y).setStroke({style: stroke, color: "black"});
@@ -72,6 +77,11 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 					path.qCurveTo(c.x, c.y, sp.x, sp.y); // Just go to second point, we're nearly there anyway
 				}
 			}
+            }
+            catch(e)
+            {
+                console.log("ERROORRRRRRRÖ "+e);    
+            }
 			return path;
 		},
 
@@ -84,8 +94,8 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 		expandLine: function(ll, fp, sp)
 		{
 			var rv = [];
-			var uddir = (fp.dir == "up" 		|| fp.dir == "down") ? 1 : -1;
-			var lrdir = (fp.dir == "right" 	|| fp.dir == "left") ? 1 : -1;
+			var uddir = (fp.dir == "up" 	|| fp.dir == "down") ? 1 : -1;
+			var lrdir = (fp.dir == "right" 	|| fp.dir == "left") ? -1 : 1;
 			var p = null;
 			// First push the first point
 			rv.push(ll[0]);
