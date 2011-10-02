@@ -5,7 +5,7 @@ dojo.require("boxgraph.routing.manhattan2");
 dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 {
 
-		boxmanager:     "",
+	boxmanager:     "",
     sanitycheck:    8,
 	
 	 constructor: function(args)
@@ -104,22 +104,29 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 			{
 				var oldp = ll[i-1];
 				p = ll[i];
-				//rv.push(oldp);  // Add old point
-				var newp = {};
+                var q = 0;
 
+				var newp = {};
+                
+                var turnx = oldp.x - p.x;
+                var turny = oldp.y - p.y; 
+                
+console.log("checking if oldp.x ("+oldp.x+") == p.x ("+p.x+")");
 				if(oldp.x == p.x)
 				{
-					q = parseInt(Math.abs((oldp.y - p.y) / 2) * uddir, 10);
+					q = parseInt(Math.abs(turny / 2) * uddir, 10);
 					newp.x = oldp.x;
 					newp.y = oldp.y + q;
-					uddir = -uddir;
+					//uddir = -uddir;
+                    uddir = p.y > sp.y ? -1 : 1;
 				}
 				else
 				{
-					q = parseInt(Math.abs((oldp.x - p.x) / 2)  * lrdir, 10);
+					q = parseInt(Math.abs(turnx / 2)  * lrdir, 10);
 					newp.y = oldp.y ;
 					newp.x = oldp.x + q;
-					lrdir = -lrdir;
+					//lrdir = -lrdir;
+                    lrdir = p.x > sp.x > 0 ? -1 : 1;
 				}
 
 				rv.push(newp); // Add new point halfway between last point and old point
