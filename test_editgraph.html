@@ -33,7 +33,7 @@
                 ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";     
             });
 
-            var editor = new boxgraph.editor({}, dojo.byId("foo"));
+            var editor = new boxgraph.editor({routing: "manhattan", numbering: false}, dojo.byId("foo"));
         })
     </script>
 </head>

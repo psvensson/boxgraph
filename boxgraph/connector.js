@@ -13,10 +13,11 @@ dojo.require("dojox.gfx");
  mouse movemenets - until the user clicks again within the ratio of another, accepting, port o another block. In decorative mode, it just renders the line between the two ports of the two blocks
  */
 dojo.declare("boxgraph.connector", null, {
-		surface								 : "",
-		//routing                 : "straight", // "straight", "manhattan", "curved"
-		routing								 : "manhattan", // "straight", "manhattan", "curved"
-		boxmanager							: "",
+		surface					: "",
+		//routing               : "straight", // "straight", "manhattan", "curved"
+		routing					: "manhattan", // "straight", "manhattan", "curved"
+		boxmanager				: "",
+        numbering               : false,
 
 		constructor: function(args)
 		{

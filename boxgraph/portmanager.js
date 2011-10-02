@@ -11,12 +11,14 @@ dojo.declare("boxgraph.portmanager",  null ,
     secondnode              : "",
     connectors              : [],
     boxmanager              : "",
-		routing									: "curved", // "straight", "manhattan", "curved"
+	routing					: "curved", // "straight", "manhattan", "curved",
+    numbering               : false,
     
     constructor: function(args)
     {
         this.surface = args.surface;
         this.boxmanager = args.boxmanager;
+        this.routing = args.routing;
         
         console.log("boxgraph.portmanager constructor. this.boxmanager = "+this.boxmanager);
         
@@ -118,7 +120,7 @@ dojo.declare("boxgraph.portmanager",  null ,
                 console.log("** setting second port to "+this.secondport);
                 
                 dojo.publish("boxgraph_connect", [this.firstport, this.secondport]);
-                this.connectors.push(new boxgraph.connector({routing: this.routing, boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport}));
+                this.connectors.push(new boxgraph.connector({routing: this.routing, boxmanager: this.boxmanager, surface: this.surface, firstport: this.firstport, secondport: this.secondport, numbering: this.numbering}));
             }
             this.firstport = this.secondport = null;
         }
