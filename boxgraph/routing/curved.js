@@ -94,8 +94,10 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 		expandLine: function(ll, fp, sp)
 		{
 			var rv = [];
-			var uddir = (fp.dir == "up" 	|| fp.dir == "down") ? 1 : -1;
-			var lrdir = (fp.dir == "right" 	|| fp.dir == "left") ? -1 : 1;
+			//var uddir = (fp.dir == "up" 	|| fp.dir == "down") ? 1 : -1;
+			//var lrdir = (fp.dir == "right" 	|| fp.dir == "left") ? 1 : -1;
+            var uddir = ll[0].y > sp.x ? -1 : 1;
+            var lrdir = ll[0].x > sp.y ? -1 : 1;
 			var p = null;
 			// First push the first point
 			rv.push(ll[0]);
@@ -111,7 +113,6 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
                 var turnx = oldp.x - p.x;
                 var turny = oldp.y - p.y; 
                 
-console.log("checking if oldp.x ("+oldp.x+") == p.x ("+p.x+")");
 				if(oldp.x == p.x)
 				{
 					q = parseInt(Math.abs(turny / 2) * uddir, 10);
