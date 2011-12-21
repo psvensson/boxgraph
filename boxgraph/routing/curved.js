@@ -46,11 +46,11 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
             
 			path.moveTo(first.x, first.y);
             
-			this.addText(surface, first.x+10, first.y+10, num++);
+			//this.addText(surface, first.x+10, first.y+10, num++);
             
 			path.lineTo(second.x, second.y);
             
-			this.addText(surface, second.x+10, second.y+10, num++);
+			//this.addText(surface, second.x+10, second.y+10, num++);
 			//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y);
 			var stroke = "Solid"
             //console.log("starting to compute new points..");
@@ -64,11 +64,12 @@ dojo.declare("boxgraph.routing.curved", boxgraph.routing.manhattan2,
 				{
 					//path.qCurveTo(c.x+qx, c.y+qy, p.x, p.y).setStroke({style: stroke, color: "black"});
 					path.qCurveTo(c.x, c.y, p.x, p.y);
-
+                    /*
 					this.circles.push(surface.createCircle({cx: c.x, cy: c.y, r:3}).setStroke({color: [0, 255, 0, 1.0], width: 1 }));
 					this.addText(surface, c.x+5, c.y+5, num++);
 					this.circles.push(surface.createCircle({cx: p.x, cy: p.y, r:3}).setStroke({color: [0, 55, 255, 1.0], width: 1 }));
 					this.addText(surface, p.x+5, p.y+5, num++);
+                    */
 					q = -q;
 					stroke = stroke == "Solid" ? "ShortDash" : "Solid";
 				}
