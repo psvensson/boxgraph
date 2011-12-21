@@ -21,6 +21,8 @@
     <script type="text/javascript">
         
         dojo.require("boxgraph.editor");
+        dojo.require("dijit.form.Button");
+        
         dojo.ready(function()
         {
             var ta = dojo.byId("textarea");
@@ -34,6 +36,15 @@
             });
 
             var editor = new boxgraph.editor({ dataurl: "boxgraph/testdata.js"}, dojo.byId("foo"));
+            
+            dojo.connect(dijit.byId('button'), "onClick", function()
+            {
+            // DEBUG
+                console.log("getting serialized data..");
+                var foo = editor.serialize();
+                console.log("serialize data is..");
+                console.dir({serialized: foo});
+            });
         })
     </script>
 </head>
@@ -41,6 +52,7 @@
     <p>
         <div id="foo"  style="float:left;"></div>
         <textarea id="textarea" cols="40" rows="20" style="float:right"></textarea>
+        <div dojoType="dijit.form.Button" id="button">Serialize</div>
     </p>
     <p style="clear:both">
         BoxGraph on GitHub: <a href="https://github.com/psvensson/boxgraph">https://github.com/psvensson/boxgraph</a>

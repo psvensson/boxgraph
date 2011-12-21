@@ -104,8 +104,8 @@ dojo.declare("boxgraph.portmanager",  null ,
 					if(this.drawLineEvent)
 					{
 						dojo.disconnect(this.drawLineEvent);
-            dojo.disconnect(this.mouseupevent);
-            this.drawLineEvent = null;
+                        dojo.disconnect(this.mouseupevent);
+                        this.drawLineEvent = null;
 					}
 
             
@@ -128,5 +128,24 @@ dojo.declare("boxgraph.portmanager",  null ,
         {
             console.log("ERROR in stopConnect: "+e);   
         }
+    },
+    
+    serializeConnections: function()
+    {
+        var rv = [];
+        
+        dojo.forEach(this.connectors, dojo.hitch(this, function(connector, i)
+        {
+            var f = connector.firstport;
+            var s = connector.secondport;
+            console.log("serializing connection "+i);
+            console.dir({first: f, second: s});
+            
+            
+            rv.push({ first: f.id, second: s.id });
+            
+        }));
+        
+        return rv;
     }
 });

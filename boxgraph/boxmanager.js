@@ -25,6 +25,14 @@ dojo.declare("boxgraph.boxmanager", null, {
 				});
 			}));
 		},
+        
+        serializeBoxes: function()
+        {
+          
+          var rv = [];
+          
+          return rv;
+        },
 
 	getPortById: function(id)
 	{

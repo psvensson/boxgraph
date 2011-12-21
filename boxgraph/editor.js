@@ -44,8 +44,9 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 			}
 			else
 			{
-        this.test();
+                this.test();
 			}
+            console.log("editor constructor done");
     },
 
 		loadGraph: function(data)
@@ -54,7 +55,7 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 
 				console.dir(data);
 				this.colors = data.colors;
-			console.log("-- creating boxes from file --");
+			    console.log("-- creating boxes from file --");
 				dojo.forEach(data.boxes, dojo.hitch(this, function(box)
 				{
 					var ports = box.ports;
@@ -68,7 +69,8 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 					}));
 					newbox.renderPorts();
 				}));
-			console.log("-- creating connections from file -- ");
+			    
+                console.log("-- creating connections from file -- ");
 			
 				dojo.forEach(data.connections, dojo.hitch(this, function(connection)
 				{
@@ -79,7 +81,20 @@ dojo.declare("boxgraph.editor", [ dijit._Widget, dijit._Templated ],
 					this.portmanager.highlightport = p2;
 					this.portmanager.stopConnect();
 				}));
+                
+                console.log("------------------------------------------------ load finished");
 		},
+        
+        serialize: function()
+        {
+            var rv = {};
+            
+            rv.colors = this.colors,
+            rv.boxes = this.boxmanager.serializeBoxes();
+            rv.connections = this.portmanager.serializeConnections();
+            
+            return rv;
+        },
 
     test: function()
     {

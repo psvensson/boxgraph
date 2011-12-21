@@ -22,6 +22,7 @@ dojo.declare("boxgraph.port",  null ,
         this.surface = args.surface;
         this.name = args.name;
         this.box = args.box;
+        this.id = args.id;
     },
     
     remove: function()
