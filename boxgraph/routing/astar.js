@@ -1,16 +1,27 @@
 
-dojo.provide("boxgraph.routing.astar");
+define(
+    [
+        "dojo/_base/declare",
+        "dijit/_WidgetBase",
+        "dijit/_TemplatedMixin",
+        "dijit/_WidgetsInTemplateMixin",
 
-
-dojo.require("dojox.gfx");
-
-/*
-The connector exists on two modes; 1 = Live, 2 = Decorative. The live mode means that a port has created it in responsoe to a user click and its line will be drawn conitnually in responsoe to
-mouse movemenets - until the user clicks again within the ratio of another, accepting, port o another block. In decorative mode, it just renders the line between the two ports of the two blocks
-*/
-dojo.declare("boxgraph.routing.astar",  null ,
-{    
-   
+        "dojo/dom-style",
+        "dojo/_base/fx",
+        "dojo/_base/lang",
+        "dojox/gfx",
+        "boxgraph/port",
+        "boxgraph/portmanager",
+        "boxgraph/boxmanager",
+        "boxgraph/base",
+        "dojo/on"
+    ],
+    function(declare, WidgetBase, TemplatedMixin, WidgetsInTemplateMixin,
+             domStyle, baseFx, lang, gfx, port, portmanager,
+             boxmanager, base, on)
+    {
+        return declare([],
+            {
 
     constructor: function(args)
     {
@@ -18,7 +29,8 @@ dojo.declare("boxgraph.routing.astar",  null ,
 /*     astar.js http://github.com/bgrins/javascript-astar
 	MIT License
 	
-	Implements the astar search algorithm in javascript using a binary heap
+	Implements the astar search algorithm in javascript using
+	 a binary heap
 	**Requires graph.js**
 
 	Example Usage:
@@ -57,7 +69,8 @@ dojo.declare("boxgraph.routing.astar",  null ,
 
         while(openHeap.size() > 0) {
 
-        	// Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
+        	// Grab the lowest f(x) to process next.  Heap keeps this
+        	// sorted for us.
             var currentNode = openHeap.pop();
 
 		    // End case -- result has been found, return the traced path
@@ -71,7 +84,8 @@ dojo.declare("boxgraph.routing.astar",  null ,
 			    return ret.reverse();
 		    }
 
-		    // Normal case -- move currentNode from open to closed, process each of its neighbors
+		    // Normal case -- move currentNode from open to closed,
+		    // process each of its neighbors
 		    currentNode.closed = true;
 
 		    var neighbors = astar.neighbors(grid, currentNode);
@@ -83,28 +97,35 @@ dojo.declare("boxgraph.routing.astar",  null ,
 				    continue;
 			    }
 
-			    // g score is the shortest distance from start to current node, we need to check if
-			    //   the path we have arrived at this neighbor is the shortest one we have seen yet
-			    // 1 is the distance from a node to it's neighbor.  This could be variable for weighted paths.
+			    // g score is the shortest distance from start to current node,
+			    // we need to check if
+			    //   the path we have arrived at this neighbor is the
+			    // shortest one we have seen yet
+			    // 1 is the distance from a node to it's neighbor.
+			    // This could be variable for weighted paths.
 			    var gScore = currentNode.g + 1;
 			    var beenVisited = neighbor.visited;
 
 			    if(!beenVisited || gScore < neighbor.g) {
 
-				    // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
+				    // Found an optimal (so far) path to this node.
+				    // Take score for node to see how good it is.
 				    neighbor.visited = true;
 				    neighbor.parent = currentNode;
 				    neighbor.h = neighbor.h || heuristic(neighbor.pos, end.pos);
 				    neighbor.g = gScore;
 				    neighbor.f = neighbor.g + neighbor.h;
-				    neighbor.debug = "F: " + neighbor.f + "<br />G: " + neighbor.g + "<br />H: " + neighbor.h;
+				    neighbor.debug = "F: " + neighbor.f + "<br />G: " +
+                        neighbor.g + "<br />H: " + neighbor.h;
 
 				    if (!beenVisited) {
-				    	// Pushing to heap will put it in proper place based on the 'f' value.
+				    	// Pushing to heap will put it in proper place
+				    	// based on the 'f' value.
 				    	openHeap.push(neighbor);
 				    }
 				    else {
-				    	// Already seen the node, but since it has been rescored we need to reorder it in the heap
+				    	// Already seen the node, but since it has been
+				    	// rescored we need to reorder it in the heap
 				    	openHeap.rescoreElement(neighbor);
 				    }
 				}
@@ -115,7 +136,8 @@ dojo.declare("boxgraph.routing.astar",  null ,
         return [];
     },
     manhattan: function(pos0, pos1) {
-    	// See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+// See list of heuristics:
+// http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
 
         var d1 = Math.abs (pos1.x - pos0.x);
         var d2 = Math.abs (pos1.y - pos0.y);
@@ -141,6 +163,7 @@ dojo.declare("boxgraph.routing.astar",  null ,
 	    return ret;
     }
     
-});
+})
+    })
 
 

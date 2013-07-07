@@ -1,10 +1,31 @@
-dojo.provide("boxgraph.routing.manhattan");
+define(
+    [
+        "dojo/_base/declare",
+        "dijit/_WidgetBase",
+        "dijit/_TemplatedMixin",
+        "dijit/_WidgetsInTemplateMixin",
 
-dojo.declare("boxgraph.routing.manhattan", null,
-{
+        "dojo/dom-style",
+        "dojo/_base/fx",
+        "dojo/_base/lang",
+        "dojox/gfx",
+        "boxgraph/port",
+        "boxgraph/portmanager",
+        "boxgraph/boxmanager",
+        "boxgraph/base",
+        "dojo/on"
+    ],
+    function(declare, WidgetBase, TemplatedMixin,
+             WidgetsInTemplateMixin, domStyle, baseFx,
+             lang, gfx, port, portmanager, boxmanager,
+             base, on)
+    {
+        return declare([],
+            {
     getRouting: function(fp, sp)
     {
-        var rv = [ {x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0} ];  // six points in manhattan
+        var rv = [ {x:0, y:0}, {x:0, y:0}, {x:0, y:0},
+            {x:0, y:0}, {x:0, y:0}, {x:0, y:0} ];  // six points in manhattan
         //var fp = this.firstport;
         //var sp = this.secondport;
         console.log("Manhattan; first and second ports are..");
@@ -18,11 +39,14 @@ dojo.declare("boxgraph.routing.manhattan", null,
         var sphup = sp.box.model.height + sp.position * 5;
         var spwup = sp.box.model.width + sp.position * 5;
         
-        console.log("Manhattan: diffx="+diffx+", diffy="+diffy+", hdx="+hdx+". hdy="+hdy+", spwup = "+spwup+", sphup = "+sphup);
-        console.log("Manhattan: fp.where = '"+fp.where+"', sp.where = '"+sp.where+"'");
+        console.log("Manhattan: diffx="+diffx+", diffy="+diffy+", hdx="+
+            hdx+". hdy="+hdy+", spwup = "+spwup+", sphup = "+sphup);
+        console.log("Manhattan: fp.where = '"+fp.where+"', sp.where = '"+
+            sp.where+"'");
         // -------------------------------- 0
         console.log("point 0");
-        rv[0] = {x: fp.x + parseInt(fp.side/2, 10), y: fp.y + parseInt(fp.side/2, 10)};
+        rv[0] = {x: fp.x + parseInt(fp.side/2, 10), y: fp.y +
+            parseInt(fp.side/2, 10)};
         // -------------------------------- 1
         console.log("point 1");
         if(fp.where == "top") 
@@ -49,61 +73,76 @@ dojo.declare("boxgraph.routing.manhattan", null,
             if(sp.where == "top")
             {
                 d = Math.abs(sp.x - rv[1].x);
-                rv[2] = diffy > 0 ? this.goRight(rv[1], d) : this.goUp(rv[1], -diffy);        
+                rv[2] = diffy > 0 ? this.goRight(rv[1], d) :
+                    this.goUp(rv[1], -diffy);
             }
             else if(sp.where == "right" || sp.where == "left")
             {
-                d = diffx > 0 ? sp.block.model.x - fp.block.model.x + fp.block.model.width : fp.block.model.x - sp.block.model.x + sp.block.model.width;
-                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], d);
+                d = diffx > 0 ? sp.block.model.x - fp.block.model.x +
+                    fp.block.model.width : fp.block.model.x -
+                    sp.block.model.x + sp.block.model.width;
+                rv[2] = diffx > 0 ? this.goRight(rv[1], d) :
+                    this.goLeft(rv[1], d);
             }
             else if(sp.where == "bottom")
             {
                 d = diffx > 0 ? hdx : hdx;
-                rv[2] = diffx > 0 ? this.goRight(rv[1], d) : this.goLeft(rv[1], -d);
+                rv[2] = diffx > 0 ? this.goRight(rv[1], d) :
+                    this.goLeft(rv[1], -d);
             }
         }
         else if(fp.where == "right") 
         {                          
             if(sp.where == "left")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs) : this.goUp(rv[1], rv[1].y - sp.y -hs);
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y - hs)
+                    : this.goUp(rv[1], rv[1].y - sp.y -hs);
             }
             else if(sp.where == "bottom")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs)
+                    : this.goUp(rv[1], rv[1].y - sp.y + hs);
             }
             else if(sp.where == "top")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);                
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs)
+                    : this.goUp(rv[1], rv[1].y - sp.y + hs);
             }
             else if(sp.where == "right")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);                
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs)
+                    : this.goUp(rv[1], rv[1].y - sp.y + hs);
             }
         }
         else if(fp.where == "bottom")
         {
             if(sp.where == "top")
             {
-                //d = diffx > 0 ? sp.block.model.x - fp.block.model.x + fp.block.model.width : fp.block.model.x - sp.block.model.x + sp.block.model.width;
+                //d = diffx > 0 ? sp.block.model.x - fp.block.model.x +
+                // fp.block.model.width : fp.block.model.x -
+                // sp.block.model.x + sp.block.model.width;
                 //d = diffx > 0 ? hdx : -hdx;
-                rv[2] = diffx > 0 ? this.goRight(rv[1], diffx) : this.goLeft(rv[1], -diffx);
+                rv[2] = diffx > 0 ? this.goRight(rv[1], diffx) :
+                    this.goLeft(rv[1], -diffx);
             }
             else if(sp.where == "bottom")
             {
                 //d = diffx > 0 ? hdx : hdx;
-                rv[2] = diffx > 0 ? this.goRight(rv[1], hdx) : this.goLeft(rv[1], -hdx);
+                rv[2] = diffx > 0 ? this.goRight(rv[1], hdx) :
+                    this.goLeft(rv[1], -hdx);
             }
         }
         else if(fp.where == "left") 
         {                          
             if(sp.where == "right")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y +hs);
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y -
+                    rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y +hs);
             }
             else if(sp.where == "bottom" || sp.where == "top")
             {
-                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y - rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
+                rv[2] = diffy > 0 ? this.goDown(rv[1], sp.y -
+                    rv[1].y + hs) : this.goUp(rv[1], rv[1].y - sp.y + hs);
             }
             else if(sp.where == "left")
             {
@@ -116,19 +155,23 @@ dojo.declare("boxgraph.routing.manhattan", null,
         {
             if(sp.where == "top")
             {
-                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x + hs) : this.goLeft(rv[3], rv[2].x - sp.x + hs);
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x + hs)
+                    : this.goLeft(rv[3], rv[2].x - sp.x + hs);
             }
             else if(sp.where == "right")
             {
-                rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) : this.goLeft(rv[2],spwup * 2);
+                rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) :
+                    this.goLeft(rv[2],spwup * 2);
             }
             else if(sp.where == "bottom")
             {
-                rv[3] = diffy > 0 ? this.goDown(rv[2], diffy + sp.side) : this.goUp(rv[2], diffy + sp.side);
+                rv[3] = diffy > 0 ? this.goDown(rv[2], diffy + sp.side)
+                    : this.goUp(rv[2], diffy + sp.side);
             }
             else if(sp.where == "left")
             {
-                rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) : this.goLeft(rv[2],spwup * 2);
+                rv[3] = diffx > 0 ? this.goRight(rv[2],spwup * 2) :
+                    this.goLeft(rv[2],spwup * 2);
             }
         }
         else if(fp.where == "right" || fp.where == "left")
@@ -139,28 +182,37 @@ dojo.declare("boxgraph.routing.manhattan", null,
             }
             else if(sp.where == "right")
             {
-                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
+                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs)
+                    : this.goUp(rv[2], sp.y + rv[2].y + hs);
             }
             else if(sp.where == "bottom")
             {
-                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
-                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) : this.goLeft(rv[2], rv[2].x - sp.x);
+                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs)
+                // : this.goUp(rv[2], sp.y + rv[2].y + hs);
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) :
+                    this.goLeft(rv[2], rv[2].x - sp.x);
             }
             else if(sp.where == "left")
             {
-                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs) : this.goUp(rv[2], sp.y + rv[2].y + hs);
-                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x) : this.goLeft(rv[2], rv[2].x - sp.x);
+                //rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y - hs)
+                // : this.goUp(rv[2], sp.y + rv[2].y + hs);
+                rv[3] = diffx > 0 ? this.goRight(rv[2], sp.x - rv[2].x)
+                    : this.goLeft(rv[2], rv[2].x - sp.x);
             }
         }
         else if(fp.where == "bottom")
         {
             if(sp.where == "top")
             {
-                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y + parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y - sp.y - parseInt(fp.side/2, 10));
+                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y +
+                    parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y
+                    - sp.y - parseInt(fp.side/2, 10));
             }
             else if(sp.where == "bottom")
             {
-                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y + parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y - sp.y - parseInt(fp.side/2, 10));
+                rv[3] = diffy > 0 ? this.goDown(rv[2], sp.y - rv[2].y +
+                    parseInt(fp.side/2, 10)) : this.goUp(rv[2], rv[2].y
+                    - sp.y - parseInt(fp.side/2, 10));
             }
         }
         
@@ -196,7 +248,8 @@ dojo.declare("boxgraph.routing.manhattan", null,
             rv[1].x = fp.x + hdx;
             rv[1].y = fp.y;
         }
-        else if((fp.where == sp.where && sp.where == "left") || (fp.where == sp.where && sp.where == "right"))
+        else if((fp.where == sp.where && sp.where == "left") ||
+         (fp.where == sp.where && sp.where == "right"))
         {
             rv[1].x = rv[0].x;
             if(diffy > 0)
@@ -208,7 +261,8 @@ dojo.declare("boxgraph.routing.manhattan", null,
                 rv[1].y = rv[0].y - sphup;              
             }
         }
-        else if((fp.where == sp.where && sp.where == "top") || (fp.where == sp.where && sp.where == "bottom"))
+        else if((fp.where == sp.where && sp.where == "top") ||
+         (fp.where == sp.where && sp.where == "bottom"))
         {
             rv[1].y = rv[0].y;
             if(diffx > 0)
@@ -249,7 +303,8 @@ dojo.declare("boxgraph.routing.manhattan", null,
     getCurvedRouting: function()
     {
         var j = parseInt(this.firstport.side/2, 10);
-        return {x1: this.firstport.x+j, y1: this.firstport.y+j, x2: this.secondport.x+j, y2: this.secondport.y+j}   ;
+        return {x1: this.firstport.x+j, y1: this.firstport.y+j,
+            x2: this.secondport.x+j, y2: this.secondport.y+j}   ;
     },
     
     goUp: function(oldpoint, a)
@@ -276,4 +331,5 @@ dojo.declare("boxgraph.routing.manhattan", null,
         return {x: oldpoint.x - a, y: oldpoint.y};
     }
 
-});
+})
+    })

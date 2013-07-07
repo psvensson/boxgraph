@@ -1,0 +1,96 @@
+{
+    "colors": ["06799F", "216278", "024E68", "3AAACF", "62B4CF"],
+    "boxes":
+    [
+        {
+            "id": 1,
+            "name":"lb0",
+            "x":50,
+            "y": 50,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 101, "dir": "right", "position": 2}
+            ]
+        },
+        {
+            "id": 2,
+            "name":"www0",
+            "x":50,
+            "y": 150,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 201, "dir": "right", "position": 2}
+            ]
+        },
+        {
+            "id": 3,
+            "name":"www1",
+            "x":50,
+            "y": 250,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 301, "dir": "right", "position": 2}
+            ]
+        },
+        {
+            "id": 4,
+            "name":"www2",
+            "x":50,
+            "y": 350,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 401, "dir": "right", "position": 2}
+            ]
+        },
+        {
+            "id": 5,
+            "name":"gold",
+            "x": 250,
+            "y": 50,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 501, "dir": "right", "position": 2},
+                { "id": 502, "dir": "left", "position": 2}
+            ]
+        },
+        {
+            "id": 6,
+            "name":"silver",
+            "x": 250,
+            "y": 250,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 601, "dir": "right", "position": 2},
+                { "id": 602, "dir": "left", "position": 2}
+            ]
+        },
+        {
+            "id": 7,
+            "name":"volvo.se",
+            "x": 450,
+            "y": 50,
+            "height":50,
+            "width": 100,
+            "ports":
+            [
+                { "id": 702, "dir": "left", "position": 2}
+            ]
+        }
+    ],
+    "connections":
+    [
+        {"first": 101, "second": 602}
+    ]
+}

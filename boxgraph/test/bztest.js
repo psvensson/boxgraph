@@ -43,7 +43,8 @@ dojo.declare("boxgraph.test.bztest", [	dijit._Widget, dijit._Templated ],
 			var val = vals[i];
 			console.log("parsing "+val);
 			var varr = val.split(",");
-			points.push({x: parseInt(varr[0], 10), y: parseInt(varr[1], 10)});
+			points.push({x: parseInt(varr[0], 10),
+                y: parseInt(varr[1], 10)});
 		}
 		console.log("points created from values are ..");
 		console.dir(points);
@@ -59,11 +60,14 @@ dojo.declare("boxgraph.test.bztest", [	dijit._Widget, dijit._Templated ],
 
 		path.moveTo(points[0]);
 		path.lineTo(points[1]);
-		this.surface.createCircle({cx: points[1].x, cy: points[1].y, r:5}).setStroke({color: [0, 0, 255, 1.0], width: 2 });
+		this.surface.createCircle({cx: points[1].x, cy: points[1].y,
+            r:5}).setStroke({color: [0, 0, 255, 1.0], width: 2 });
 		path.lineTo(points[2]);
-		this.surface.createCircle({cx: points[2].x, cy: points[2].y, r:5}).setStroke({color: [0, 255, 0, 1.0], width: 2 });
+		this.surface.createCircle({cx: points[2].x, cy: points[2].y,
+            r:5}).setStroke({color: [0, 255, 0, 1.0], width: 2 });
 		path.lineTo(points[3]);
-		this.surface.createCircle({cx: points[3].x, cy: points[3].y, r:5}).setStroke({color: [255, 0, 0, 1.0], width: 2 });
+		this.surface.createCircle({cx: points[3].x, cy: points[3].y,
+            r:5}).setStroke({color: [255, 0, 0, 1.0], width: 2 });
 		path.lineTo(points[4]);
 
 		bpath.moveTo(points[0]);

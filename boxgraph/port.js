@@ -1,10 +1,28 @@
-dojo.provide("boxgraph.port");
+define(
+    [
+        "dojo/_base/declare",
+        "dijit/_WidgetBase",
+        "dijit/_TemplatedMixin",
+        "dijit/_WidgetsInTemplateMixin",
+        "dojo/text!./editor.html",
+        "dojo/dom-style",
+        "dojo/_base/fx",
+        "dojo/_base/lang",
+        "dojox/gfx",
 
-
-dojo.require("dojox.gfx");
-
-dojo.declare("boxgraph.port",  null ,
-{    
+        "boxgraph/portmanager",
+        "boxgraph/boxmanager",
+        "boxgraph/base",
+        "dojo/on",
+        "dojox/gfx/move",
+        "dojo/_base/connect"
+    ],
+    function(declare, WidgetBase, TemplatedMixin, WidgetsInTemplateMixin,
+             template, domStyle, baseFx, lang, gfx,  portmanager,
+             boxmanager, base, on, move, connect)
+    {
+        return declare([],
+        {
     surface             : "",
     side                : 10,
     x                   : 0,
@@ -38,17 +56,20 @@ dojo.declare("boxgraph.port",  null ,
     {
         this.x = x;
         this.y = y;
-        //console.log("boxgraph.port "+this.name+" render called. x = "+x+", y = "+y);
+        //console.log("boxgraph.port "+this.name+" render called. x = "
+        // +x+", y = "+y);
         var rect = {x: x, y: y, width: this.side, height: this.side};
         //console.log("creating port with parameters..");
         //console.dir(rect);
         var red_rect = this.surface.createRect(rect);
         red_rect.setFill("#66A3D2");
-        red_rect.setStroke({color: "#3AAACF", width: 1}); 
+        red_rect.setStroke({color: "#3AAACF", width: 2});
         this.avatar = red_rect;
                 
-        dojo.connect(red_rect.getNode(), "onmouseover", this, this.mouseOver);
-        dojo.connect(red_rect.getNode(), "onmouseout", this, this.mouseOut);
+        connect.connect(red_rect.getNode(), "onmouseover",
+            this, this.mouseOver);
+        connect.connect(red_rect.getNode(), "onmouseout",
+            this, this.mouseOut);
         
         //'this.surface.add(this.avatar);
     },
@@ -58,25 +79,40 @@ dojo.declare("boxgraph.port",  null ,
         if(!this.drawLineEvent)
         {
             this.highlight();
-            dojo.publish("port_highlight", [this]);   
+            dojo.publish("port_highlight", [this]);
+            this.ease = true;
         }
     },
     
     mouseOut: function(e)
     {
-        this.lowlight(); 
-        dojo.publish("port_highlight", [null]);
+        if(this.ease)
+        {
+            var me = this;
+            setTimeout(function()
+            {
+                me.ease = false;
+                me.lowlight();
+                dojo.publish("port_highlight", [null]);
+            }, 500);
+        }
+        else
+        {
+            this.lowlight();
+            dojo.publish("port_highlight", [null]);
+        }
     },
     
     highlight: function()
     {
-        this.avatar.setStroke({color: "yellow", width: 2});
+        this.avatar.setStroke({color: "yellow", width: 4});
     },
     
     lowlight: function()
     {
-        this.avatar.setStroke({color: "green", width: 1});   
+        this.avatar.setStroke({color: "green", width: 2});
     }
     
     
-});
+})
+    })

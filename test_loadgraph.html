@@ -2,50 +2,51 @@
 <html>
 <head>
     <title>Boxgraph Test Page</title>
-    
-    <script type="text/javascript">
-       djConfig =
-       {
 
-            isDebug: true,
-            debugAtAllCosts: true,
-            baseUrl: "./",
-            parseOnLoad: true,
-            modulePaths: {'boxgraph': './boxgraph'}
-       }
+    <script data-dojo-config="async: 1, dojoBlankHtmlUrl: '/blank.html',
+        baseUrl: 'ui',
+        parseOnLoad : true,
+        packages: [ {
+            name: 'boxgraph',
+            location: '../boxgraph'
+        } ]"
+            src="https://ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js">
     </script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.5.0/dojo/dojo.xd.js.uncompressed.js"></script>
-    
-    <!-- <script src="http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dojo/dojo.js"></script> -->
+
+    <script>
+        // load our custom/Hello module and wait for the DOM to be ready
+        require([ "boxgraph/editor", "dijit/form/Button", "dojo/domReady!", "dojo/query", "dojo/ready", "dojo/on", "dijit/registry"], function(beditor, button, domready, query, ready, on, registry)
+        {
+            ready(function()
+            {
+                var ta = dojo.byId("textarea");
+                dojo.subscribe("boxgraph_connect", function(p1, p2)
+                {
+                    ta.innerHTML += "connect event for '"+p1.name+"' and '"+p2.name+"'\n";
+                });
+                dojo.subscribe("boxgraph_disconnect", function(p1, p2)
+                {
+                    ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";
+                });
+
+                var editor = new beditor({ dataurl: "boxgraph/testdata2.json"}, query("#foo")[0]);
+
+                on(registry.byId('button'), "onClick", function()
+                {
+                    // DEBUG
+                    console.log("getting serialized data..");
+                    var foo = editor.serialize();
+                    console.log("serialize data is..");
+                    console.dir({serialized: foo});
+                });
+            });
+        });
+    </script>
+
     <script type="text/javascript">
         
-        dojo.require("boxgraph.editor");
-        dojo.require("dijit.form.Button");
-        
-        dojo.ready(function()
-        {
-            var ta = dojo.byId("textarea");
-            dojo.subscribe("boxgraph_connect", function(p1, p2)
-            {
-                ta.innerHTML += "connect event for '"+p1.name+"' and '"+p2.name+"'\n";     
-            });
-            dojo.subscribe("boxgraph_disconnect", function(p1, p2)
-            {
-                ta.innerHTML += "disconnect event for '"+p1.name+"' and '"+p2.name+"'\n";     
-            });
 
-            var editor = new boxgraph.editor({ dataurl: "boxgraph/testdata.js"}, dojo.byId("foo"));
-            
-            dojo.connect(dijit.byId('button'), "onClick", function()
-            {
-            // DEBUG
-                console.log("getting serialized data..");
-                var foo = editor.serialize();
-                console.log("serialize data is..");
-                console.dir({serialized: foo});
-            });
-        })
+
     </script>
 </head>
 <body>

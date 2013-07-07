@@ -6,9 +6,10 @@ dojo.require("dijit._Widget");
 dojo.require("dojox.gfx");
 
 
-dojo.declare("drawutil.test.testBezier", [	dijit._Widget, dijit._Templated  ],
+dojo.declare("drawutil.test.testBezier", [dijit._Widget, dijit._Templated ],
 {
-	templatePath			: dojo.moduleUrl("drawutil.test", "testBezier.html"),
+	templatePath			: dojo.moduleUrl("drawutil.test",
+        "testBezier.html"),
 	widgetsInTemplate	: true,
 	color							:	"#7ad",
 	numpixels					: 30,
@@ -17,7 +18,8 @@ dojo.declare("drawutil.test.testBezier", [	dijit._Widget, dijit._Templated  ],
 	{
 		this.inherited(arguments);
 		console.log("postCreate in testBezier called");
-		this.surface = dojox.gfx.createSurface(this.canvas, 400, 400);
+		this.surface = dojox.gfx.createSurface(this.canvas,
+            400, 400);
 
 		//setTimeout(dojo.hitch(this, doCurve),20);
 
@@ -34,7 +36,8 @@ dojo.declare("drawutil.test.testBezier", [	dijit._Widget, dijit._Templated  ],
 		var points = [];
 		for(var i = 0; i < this.numpixels; i++)
 		{
-			points[i] = this.surface.createCircle({cx:100, cy:10*i, r:3}).setFill(this.color);
+			points[i] = this.surface.createCircle({cx:100,
+                cy:10*i, r:3}).setFill(this.color);
 		}
 
 		this.drawBezier(B1, B2, B3, B4, this.numpixels, points);
@@ -43,7 +46,8 @@ dojo.declare("drawutil.test.testBezier", [	dijit._Widget, dijit._Templated  ],
 
 	doCurve: function()
 	{
-		this.circle = this.surface.createCircle({cx:100, cy:100, r:5}).setFill("#2f5");
+		this.circle = this.surface.createCircle({cx:100, cy:100, r:5}).
+            setFill("#2f5");
 
 		//Control Points
 		P1 = {x:50, y:50};
@@ -84,8 +88,10 @@ dojo.declare("drawutil.test.testBezier", [	dijit._Widget, dijit._Templated  ],
 		function B4(t) { return (1-t)*(1-t)*(1-t) }	
 
 		var pos = {x:0, y:0};
-		pos.x = C1.x*B1(percent) + C2.x*B2(percent) + C3.x*B3(percent) + C4.x*B4(percent);
-		pos.y = C1.y*B1(percent) + C2.y*B2(percent) + C3.y*B3(percent) + C4.y*B4(percent);
+		pos.x = C1.x*B1(percent) + C2.x*B2(percent) +
+            C3.x*B3(percent) + C4.x*B4(percent);
+		pos.y = C1.y*B1(percent) + C2.y*B2(percent) +
+            C3.y*B3(percent) + C4.y*B4(percent);
 		return pos;
 
 	},

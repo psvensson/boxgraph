@@ -1,9 +1,24 @@
-dojo.provide("boxgraph.base");
+define(
+    [
+        "dojo/_base/declare",
+        "dijit/_WidgetBase",
+        "dijit/_TemplatedMixin",
+        "dijit/_WidgetsInTemplateMixin",
+        "dojo/text!./editor.html",
+        "dojo/dom-style",
+        "dojo/_base/fx",
+        "dojo/_base/lang",
+        "dojox/gfx",
 
-dojo.declare("boxgraph.base", null,
-{
+    ],
+    function(declare, WidgetBase, TemplatedMixin, WidgetsInTemplateMixin,
+             template, domStyle, baseFx, lang, gfx)
+    {
+        return declare([],
+            {
 	
-    model       : "", // The model containinb properties for the things being drawn
+    model       : "", // The model containinb properties for the
+    // things being drawn
     // Minimum model properties are; {x:0 , y:0, height: 100, width: 100}  .
    
     
@@ -17,7 +32,7 @@ dojo.declare("boxgraph.base", null,
         }
         catch(e)
         {
-         console.log("WTF!!!! ** trying to create box without arguments eh??!! : "+e);
+         console.log("WTF!!!! ** box without arguments eh??!! : "+e);
          throw("WTF!!");
         }
     },
@@ -29,7 +44,8 @@ dojo.declare("boxgraph.base", null,
         where: "xxxx"
     }
     
-    The where property is a cue for the respective entity where to put the port, like "right" for the right side of a rectangular block
+    The where property is a cue for the respective entity where to put
+     the port, like "right" for the right side of a rectangular block
     The ratio property tells how far out from 'where' the port is to be placed.
     */
     addPort: function(p)
@@ -42,6 +58,6 @@ dojo.declare("boxgraph.base", null,
         
     }
 
+    })
 
-
-});
+})
